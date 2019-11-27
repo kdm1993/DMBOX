@@ -77,13 +77,45 @@
 	</div>
 	<div id="menu" class="container">
 		<ul>
-			<li class="current_page_item"><a href="Home">홈</a></li>
-			<li><a href="">영화</a></li>
-			<li><a href="">대기중</a></li>
-			<li><a href="">대기중</a></li>
-			<li><a href="">대기중</a></li>
-			<li><a href="">고객센터</a></li>
+			<li><a href="Home">홈</a></li>
+			<li><a href="Home">영화</a></li>
+			<li><a href="Home">대기중</a></li>
+			<li><a href="Home">대기중</a></li>
+			<li><a href="Home">대기중</a></li>
+			<li><a href="Home">고객센터</a></li>
 		</ul>
 	</div>
+	<script>
+		$(document).ready(function() {
+			$('#menu ul li').click(function(event) {
+				var i = $('#menu ul li').index(this);			
+				var allcookies = document.cookie;
+				   cookiearray  = allcookies.split(';');
+
+				   for(var x=0; x<cookiearray.length; x++){
+					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+					      value = cookiearray[x].split('=')[1];
+					      document.cookie = "Tap_menu="+i;
+					  }
+				   }
+			})			
+		});
+	</script>
+	<%
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null && cookies.length > 0) {
+			for(int i=0; i<cookies.length; i++) {
+				if(cookies[i].getName().equals("Tap_menu")) {
+					%>
+					<script>
+						$('#menu ul li').removeClass('current_page_item');
+						$('#menu ul li').eq(<%=cookies[i].getValue()%>).addClass('current_page_item');
+					</script>
+					<%
+				}
+			}
+		}
+	%>
 </body>
 </html>

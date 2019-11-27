@@ -20,6 +20,10 @@ Released   : 20130731
 <meta name="description" content="" />
 </head>
 <body>
+	<%
+		Cookie cookie = new Cookie("Tap_menu", "0");
+		response.addCookie(cookie);
+	%>
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="banner" class="container">
 		<div id="banner1">
@@ -239,11 +243,6 @@ Released   : 20130731
 				var i = $('.rank3_a').index(this);
 				
 				$('.rank3_b:eq('+ i +')').hide();
-			})
-			$('.rank3_a').click(function(event) {
-				var i = $('.rank3_a').index(this);
-				
-				$('.carousel').carousel(i);
 			})
 		});
 	</script>
