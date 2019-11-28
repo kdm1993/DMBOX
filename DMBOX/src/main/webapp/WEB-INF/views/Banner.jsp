@@ -35,7 +35,7 @@
 		<div><a href="#">고객센터</a></div>
 		<c:choose>
 			<c:when test="${logincheck == false}">
-				<div><a href="#">회원가입</a></div>
+				<div><a href="JoinPage">회원가입</a></div>
 				<div><a href="Logined">로그인</a></div>
 			</c:when>
 			<c:when test="${logincheck == true}">

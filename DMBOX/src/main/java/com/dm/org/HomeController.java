@@ -182,6 +182,11 @@ public class HomeController {
 	public String Logined(Model model, HttpServletRequest request) {
 		return "Logined";
 	}
+	
+	@RequestMapping(value = "/JoinPage", method = RequestMethod.GET)
+	public String JoinPage(Model model, HttpServletRequest request) {
+		return "JoinPage";
+	}
 
 	@RequestMapping(value = "/Login_Check", method = RequestMethod.POST)
 	@ResponseBody

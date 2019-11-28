@@ -244,6 +244,11 @@ Released   : 20130731
 				
 				$('.rank3_b:eq('+ i +')').hide();
 			})
+			$('.rank3_a').click(function(event) {
+				var i = $('.rank3_a').index(this);
+				
+				$('.carousel').carousel(i);
+			})
 		});
 	</script>
 </body>
