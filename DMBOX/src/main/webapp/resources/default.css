@@ -408,7 +408,11 @@ ul.contact li a.icon-rss:before {
 /* JoinPage                                                                        */
 /*********************************************************************************/
 #join input, #join select {
-	height: 30px;
+	height: 35px;
+}
+
+#join input[type="radio"] {
+	height: 16px;
 }
 
 #join .form__field {
@@ -444,48 +448,6 @@ ul.contact li a.icon-rss:before {
 
 #join .mail_input_btn {
 	width: 145px;
-}
-
-#join .form--login input[type=checkbox] {
-	-webkit-appearance: none;
-	position: absolute;
-	display: none;
-	width: 22px;
-	height: 22px;
-	vertical-align: middle;
-}
-
-#join .form--login input[type=checkbox]+label {
-	display: inline-block;
-	position: relative;
-	padding-top:1px;
-	padding-left: 50px;
-	margin-right: 15px;
-	font-size: 13px;
-}
-
-#join .form--login input[type=checkbox]+label:before {
-	content: "";
-	display: inline-block;
-	top: 11px;
-	left: 21px;
-	width: 16px;
-	height: 16px;
-	margin-right: 10px;
-	position: absolute;
-	bottom: 1px;
-	background-color: #ccc;
-}
-
-#join .form--login input[type=checkbox]:checked+label:before {
-	content: "\2713";
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-	font-size: 16px;
-	font-weight: 800;
-	color: white;
-	background: #363b41;
-	text-align: center;
-	line-height: 16px;
 }
 /*********************************************************************************/
 /* Sub_menu                                                                        */
@@ -687,6 +649,13 @@ ul.contact li a.icon-rss:before {
 	font-size: 41px;
 	margin-top: 0px;
 	font-family: 'Do Hyeon', sans-serif;
+}
+
+.item_text .eng_title {
+	font-weight: bold;
+	color: #919191;
+	font-size: 17px;
+	margin-top: -94px;
 }
 
 #banner a {

@@ -67,6 +67,7 @@ public class HomeController {
 							List<String> ticketing = new ArrayList<String>();
 							List<String> width_poster = new ArrayList<String>();
 							List<String> height_poster = new ArrayList<String>();
+							List<String> movie_eng_name = new ArrayList<String>();
 							
 							for(int x=0; x<body.select("a").size(); x+=4) {
 								Document doc2 = Jsoup.connect("http://www.maxmovie.com"+body.select("a").get(x).attr("href")).get();
@@ -74,6 +75,10 @@ public class HomeController {
 								
 								width_poster.add(body2.attr("style").replace("background: url('", "").replace("') no-repeat", ""));
 								height_poster.add(doc2.select(".mspost").select("img").attr("src"));
+								
+								body2 = doc2.select(".nmvtx");
+								movie_eng_name.add(body2.text());
+								
 							}
 							for(int x=1; x<body.select("em").size(); x+=3) {	
 								grade.add(body.select("em").get(x).text());
@@ -91,6 +96,7 @@ public class HomeController {
 								bo.setMovie_name(body.select("img").not("[alt=예매하기]").not("[alt=상세보기]").get(x).attr("alt"));
 								bo.setGrade(grade.get(x));
 								bo.setTicketing(ticketing.get(x));
+								bo.setMovie_eng_name(movie_eng_name.get(x));
 								
 								list.add(bo);
 							}
@@ -185,7 +191,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/JoinPage", method = RequestMethod.GET)
 	public String JoinPage(Model model, HttpServletRequest request) {
-		return "JoinPage";
+		return "Joinpage";
 	}
 
 	@RequestMapping(value = "/Login_Check", method = RequestMethod.POST)

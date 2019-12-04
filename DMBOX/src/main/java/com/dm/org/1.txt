@@ -1,0 +1,70 @@
+﻿<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000111032"> <img alt="겨울왕국 2 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/02/M000111032/poster/Max2019Frozen7.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rred"><em>1</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000111032"><em class="yall">전체</em>겨울왕국 2 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.21</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000111032"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000111032"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>92.4</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>33,562</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114178"> <img alt="블랙머니 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/09/M000114178/poster/Max2019BLACKMONEY4.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rred"><em>2</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114178"><em class="y12">12</em>블랙머니 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.13</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114178"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114178"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>2.1</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>5,295</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000107906"> <img alt="감쪽같은 그녀 " src="//images.maxmovie.com/thumbf/movie_info/image/2018/07/M000107906/poster/Max2018littlegirl6.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rred"><em>3</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000107906"><em class="yall">전체</em>감쪽같은 그녀 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.12.04</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000107906"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000107906"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.8</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>0</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114120"> <img alt="신의 한 수: 귀수편 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/09/M000114120/poster/Max2019thegod1.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>4</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114120"><em class="y15">15</em>신의 한 수: 귀수편 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.07</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114120"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114120"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.4</strong>%</td> 
+ <td class="mtxtcb"><strong>6.00점</strong></td> 
+ <td class="mtxtcb"><strong>2,710</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114084"> <img alt="82년생 김지영 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/09/M000114084/poster/Max2019kimjy4.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>5</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114084"><em class="y12">12</em>82년생 김지영 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.10.23</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114084"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114084"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.3</strong>%</td> 
+ <td class="mtxtcb"><strong>9.20점</strong></td> 
+ <td class="mtxtcb"><strong>1,567</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000110697"> <img alt="윤희에게 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/01/M000110697/poster/Max2019fullmoon4.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>6</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000110697"><em class="y12">12</em>윤희에게 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.14</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000110697"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000110697"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.3</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>189</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114454"> <img alt="나를 찾아줘 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/10/M000114454/poster/Max2019BringMeHome1.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>7</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114454"><em class="y15">15</em>나를 찾아줘 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.27</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114454"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114454"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.3</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>0</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114685"> <img alt="프란치스코 교황: 맨 오브 히스 워드 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/10/M000114685/poster/Max2019PopeFrancis.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>8</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114685"><em class="yall">전체</em>프란치스코 교황: 맨 오브 히스 워드 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.21</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114685"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114685"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.3</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>125</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000112383"> <img alt="터미네이터: 다크 페이트 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/05/M000112383/poster/Max2019DarkFate3.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>10</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000112383"><em class="y15">15</em>터미네이터: 다크 페이트 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.10.30</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000112383"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000112383"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.2</strong>%</td> 
+ <td class="mtxtcb"><strong>4.00점</strong></td> 
+ <td class="mtxtcb"><strong>501</strong>회</td> 
+</tr>
+<tr class="ptb"> 
+ <td> <p class="tmpo"> <a href="/Movie/M000114093"> <img alt="아이리시맨 " src="//images.maxmovie.com/thumbf/movie_info/image/2019/09/M000114093/poster/Max2019TheIrishman.jpg" onerror="javascript:this.src='//image.maxmovie.com/movieinfo/image/poster/movie/z_Maxblank.jpg';" style="width:84px;height:120px;"> <span class="rgray"><em>11</em></span> </a> </p> </td> 
+ <td style="text-align:left;vertical-align:top"> <p class="mtx1 pl7"><a href="/Movie/M000114093"><em class="y18">청불</em>아이리시맨 </a></p> <p class="mtx2 pl7"><em>개봉일 </em>2019.11.20</p> <p class="pl7"><a href="//ticket.maxmovie.com/Reserve/Movie/M000114093"><img alt="예매하기" src="//image.maxmovie.com/movie_info/images/btn_mreserve.gif"></a> <a href="/Movie/M000114093"><img alt="상세보기" src="//image.maxmovie.com/movie_info/images/btn_mview.gif"></a></p> </td> 
+ <td class="mtxtcr"><strong>0.2</strong>%</td> 
+ <td class="mtxtcb"><strong>-</strong></td> 
+ <td class="mtxtcb"><strong>167</strong>회</td> 
+</tr>

@@ -9,5 +9,5 @@ public class BoxOfficeDTO {
 	private String height_poster;
 	private String grade;
 	private String ticketing;
-
+	private String movie_eng_name;
 }

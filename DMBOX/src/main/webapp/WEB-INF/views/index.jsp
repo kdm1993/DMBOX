@@ -84,6 +84,7 @@ Released   : 20130731
 							<p class="ticket_text">예매 1위</p>
 							<p class="ticket_value">${list[0].ticketing}%</p>
 							<p class="title">${list[0].movie_name}</p>
+							<p class="eng_title">${list[0].movie_eng_name}</p>
 						</div>
 					</div>
 					<c:forEach items="${list}" var="list" varStatus="status" begin="1">
@@ -96,6 +97,7 @@ Released   : 20130731
 								<p class="ticket_text">예매 ${status.count+1}위</p>
 								<p class="ticket_value">${list.ticketing}%</p>
 								<p class="title">${list.movie_name}</p>
+								<p class="eng_title">${list.movie_eng_name}</p>
 							</div>
 						</div>
 					</c:forEach>
