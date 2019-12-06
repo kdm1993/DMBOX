@@ -209,6 +209,32 @@ public class HomeController {
 			return "0";
 		}
 	}
+	
+	@RequestMapping(value = "/Join_Check", method = RequestMethod.POST)
+	@ResponseBody
+	public String Join_Check(Model model, HttpServletRequest request) {
+		if(request.getParameter("userID") != null) {
+			if(((MemberDTO) sql.selectOne("member.id_check", request.getParameter("userID"))) != null) {
+				return "0";
+			} else {
+				return "1";
+			}			
+		} else if(request.getParameter("userEmail") != null) {
+			if(((MemberDTO) sql.selectOne("member.email_check", request.getParameter("userEmail"))) != null) {
+				return "0";
+			} else {
+				return "1";
+			}		
+		} else if(request.getParameter("userPhone") != null) {
+			if(((MemberDTO) sql.selectOne("member.phone_check", request.getParameter("userPhone"))) != null) {
+				return "0";
+			} else {
+				return "1";
+			}		
+		} else {
+			return "1";
+		}
+	}
 
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)
 	public String Logout(Model model, HttpServletRequest request) {

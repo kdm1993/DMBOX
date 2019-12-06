@@ -14,4 +14,16 @@
 		select * from member
 		where mail_send_agree = 'on'
 	</select>
+	<select id="id_check" parameterType="String" resultType="com.dm.org.MemberDTO" >
+		select * from member
+		where id = #{id}
+	</select>
+	<select id="email_check" parameterType="String" resultType="com.dm.org.MemberDTO" >
+		select * from member
+		where email = #{email}
+	</select>
+	<select id="phone_check" parameterType="String" resultType="com.dm.org.MemberDTO" >
+		select * from member
+		where tel = #{tel}
+	</select>
 </mapper>

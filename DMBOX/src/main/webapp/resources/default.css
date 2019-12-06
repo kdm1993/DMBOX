@@ -84,10 +84,11 @@ input, select {
 	transition: background-color .3s;
 }
 
-input[type="text"], input[type="password"] {
-	width: 250px;
+input[type="text"], input[type="password"], select {
+	width: 338px;
 	margin-left: -3px;
 	margin-top: 2px;
+	float:left;
 }
 
 input[type="submit"]:focus, input[type="submit"]:hover {
@@ -440,9 +441,13 @@ ul.contact li a.icon-rss:before {
 }
 
 #join .check_btn {
-	border: none;
-	color: red;
 	background: #282828;
+	width: 338px;
+ 	float : left;
+	border : none;
+	margin-left : 23px;
+	padding : 0px;
+	color : red;
 	font-weight: bold;
 }
 
