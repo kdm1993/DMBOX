@@ -16,6 +16,11 @@ body {
 	height: 500px;
 }
 
+.div_left {
+	float: left;
+	width: 100%;
+}
+
 h1, h2, h3 {
 	margin: 0;
 	padding: 0;
@@ -85,14 +90,26 @@ input, select {
 }
 
 input[type="text"], input[type="password"], select {
-	width: 338px;
+	width: 250px;
 	margin-left: -3px;
 	margin-top: 2px;
 	float:left;
 }
 
-input[type="submit"]:focus, input[type="submit"]:hover {
+input[type="button"]:focus, input[type="button"]:hover, input[type="submit"]:focus, input[type="submit"]:hover {
 	background-color: white;
+}
+
+input[type="button"], input[type="submit"] {
+	border-radius: 0.25rem;
+	padding: 1rem;
+	width: 250px;
+	margin-left: -3px;
+	margin-top: 2px;
+	background-color: #c9c9c9;
+	color: black;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 /*********************************************************************************/
@@ -363,6 +380,11 @@ ul.contact li a.icon-rss:before {
 	margin-top: 28px;
 }
 
+#logo select {
+	width:95px;
+}
+
+
 /*********************************************************************************/
 /* Menu                                                                          */
 /*********************************************************************************/
@@ -409,11 +431,32 @@ ul.contact li a.icon-rss:before {
 /* JoinPage                                                                        */
 /*********************************************************************************/
 #join input, #join select {
-	height: 35px;
+	height: 45px;
 }
 
 #join input[type="radio"] {
-	height: 16px;
+	height: 27px;
+}
+
+#join #postcode {
+	width: 93px;
+}
+
+#join #roadAddress {
+	width: 250px;	
+}
+
+#join #jibunAddress {
+	width: 250px;
+}
+
+#join form label {
+	line-height: 34px;
+	vertical-align: middle;
+}
+
+#join input {
+	margin-right: 12px;
 }
 
 #join .form__field {

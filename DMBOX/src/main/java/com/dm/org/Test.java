@@ -9,9 +9,12 @@ import org.jsoup.select.Elements;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		Document doc = Jsoup.connect("http://www.maxmovie.com/Chart/Rank/List").get();
-		Elements body = doc.select(".ptb");
+		Document doc = Jsoup.connect("http://www.megabox.co.kr/?menuId=movie-showing").get();
+		Elements body = doc.select(".thumb flip");
+		System.out.println(doc);
+		System.out.println("완료");
 		
+		/*		
 		ArrayList<BoxOfficeDTO> list = new ArrayList<BoxOfficeDTO>();
 
 		List<String> grade = new ArrayList<String>();
@@ -47,5 +50,6 @@ public class Test {
 			
 			list.add(bo);
 		}
+		*/
 	}
 }
