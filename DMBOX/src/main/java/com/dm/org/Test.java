@@ -1,55 +1,88 @@
 package com.dm.org;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class Test {
+	
+	public static StringBuilder sb;
+	
 	public static void main(String[] args) throws Exception {
-		Document doc = Jsoup.connect("http://www.megabox.co.kr/?menuId=movie-showing").get();
-		Elements body = doc.select(".thumb flip");
-		System.out.println(doc);
-		System.out.println("완료");
-		
-		/*		
-		ArrayList<BoxOfficeDTO> list = new ArrayList<BoxOfficeDTO>();
+		String clientId = "S6G1FEe39f_eEOMNA58_";// 애플리케이션 클라이언트 아이디값";
+		String clientSecret = "tfFbyN5NS0";// 애플리케이션 클라이언트 시크릿값";\
+		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
+		/*
+		int display = 100; // 검색결과갯수. 최대100개
+		try {
+			String text = URLEncoder.encode("조커", "utf-8");
+			String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text + "&display=" + display
+					+ "&";
 
-		List<String> grade = new ArrayList<String>();
-		List<String> ticketing = new ArrayList<String>();
-		List<String> width_poster = new ArrayList<String>();
-		List<String> height_poster = new ArrayList<String>();
-		List<String> movie_eng_name = new ArrayList<String>();
-		
-		for(int x=0; x<body.select("a").size(); x+=4) {
-			Document doc2 = Jsoup.connect("http://www.maxmovie.com"+body.select("a").get(x).attr("href")).get();
-			Elements body2 = doc2.select(".nmvtx");
-			System.out.println(body2.text());
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("X-Naver-Client-Id", clientId);
+			con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+			if (responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else {
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			sb = new StringBuilder();
+			String line;
+
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			con.disconnect();
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(sb.toString());
+			JSONObject jsonObj = (JSONObject) obj;
+			JSONArray jsonArr = (JSONArray) jsonObj.get("items");
 			
-			width_poster.add(body2.attr("style").replace("background: url('", "").replace("') no-repeat", ""));
-			height_poster.add(doc2.select(".mspost").select("img").attr("src"));
-		}
-		for(int x=1; x<body.select("em").size(); x+=3) {	
-			grade.add(body.select("em").get(x).text());
-		}
-		
-		for(int x=0; x<body.select("em").size(); x+=3) {
-			ticketing.add(body.select("strong").get(x).text());
-		}
-		
-		
-		for(int x=0; x<body.select("img").not("[alt=예매하기]").not("[alt=상세보기]").size(); x++) {
-			BoxOfficeDTO bo = new BoxOfficeDTO();
-			bo.setWidth_poster(width_poster.get(x));
-			bo.setHeight_poster(height_poster.get(x));
-			bo.setMovie_name(body.select("img").not("[alt=예매하기]").not("[alt=상세보기]").get(x).attr("alt"));
-			bo.setGrade(grade.get(x));
-			bo.setTicketing(ticketing.get(x));
-			
-			list.add(bo);
+			for(int x=0; x<jsonArr.size(); x++) {
+				JSONObject jsonObj2 = (JSONObject) jsonArr.get(x);
+				
+				String title = (String) jsonObj2.get("title");
+				String director = (String) jsonObj2.get("director");
+				String sub_title = (String) jsonObj2.get("subtitle");
+				String img = (String) jsonObj2.get("image");
+				String date = (String) jsonObj2.get("pubDate");
+				String rating = (String) jsonObj2.get("userRating");
+				
+				title = title.replace("<b>", "");
+				title = title.replace("</b>", "");
+				img = img.replace("'\'", "");
+				director = director.substring(0, director.length()-1);
+				
+				System.out.println("제목 : " + title);
+				System.out.println("영어제목 : " + sub_title);
+				System.out.println("감독 : " + director);
+				System.out.println("이미지 : " + img);
+				System.out.println("제작년도 : " + date);
+				System.out.println("평점 : " + rating);
+				System.out.println("---------------------");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		*/
+		
+		
 	}
 }

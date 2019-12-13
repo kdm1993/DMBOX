@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,22 +8,28 @@
 </head>
 <body>
 	<jsp:include page="Banner.jsp"></jsp:include>
-	<div id="sub_menu" class="container">
-		<div id="sub_menu_slide">
-			<div>
+	<div id="service" class="container">
+		<c:forEach items="${searchlist}" var="list" varStatus="status" begin="0">    
+			<div class="movielist">
 				<ul>
 					<li>
-						<p>고객센터</p>			
+						<img src="${list.img}">
 					</li>
-					<li class="slide_bar"><a href="#">공지사항</a></li>
-					<li class="slide_bar"><a href="#">이벤트</a></li>
-					<li class="slide_bar"><a href="#">1:1 문의</a></li>
+					<li>
+						<a class="title" href="#">${list.title} (${list.subtitle})</a>  
+					</li>
+					<li>
+						<span>${list.date}년 개봉</span>
+					</li>
+					<li>
+						<span>감독 : ${list.director}</span>
+					</li>
+					<li>
+						<span>평점 : ${list.rating}</span>
+					</li>
 				</ul>
-			</div>
-		</div>
-		<div id="sub_menu_2">
-			
-		</div>
+			</div>		
+		</c:forEach>
 	</div>
 	<jsp:include page="Copyright.jsp"></jsp:include>
 </body>

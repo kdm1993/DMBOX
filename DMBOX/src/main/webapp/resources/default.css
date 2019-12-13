@@ -724,7 +724,7 @@ ul.contact li a.icon-rss:before {
 	width: 22px;
 	margin: 0px;
 	margin-right: 2px;
-	line-height: 32px;
+	line-height: 30px;
 }
 
 .rank3 {
@@ -733,10 +733,10 @@ ul.contact li a.icon-rss:before {
 	margin: 0px;
 	margin-right: 2px;
 	font-size: 10pt;
-}
-
-.rank3 a {
+	display: inline-block;
+	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .rank3_b {
@@ -761,6 +761,51 @@ ul.contact li a.icon-rss:before {
 	overflow: hidden;
 	padding: 3em 0em;
 	border-bottom: 1px solid #363636;
+}
+
+/*********************************************************************************/
+/* Service                                                                          */
+/*********************************************************************************/
+#service .movielist {
+	overflow: hidden;
+	width: 240px;
+	float: left;
+	text-align: center;
+}
+
+#service .movielist img {
+	display: inline-block;
+	margin-top: 25px;
+	margin-bottom: 10px;
+	width: 110px;
+	height: 155px;
+}
+
+#service .movielist .title {
+	color: #c9c9c9;
+	font-weight: bold;
+}
+
+#service .movielist li:nth-child(n+2) {
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 210px;
+	height: 22px;
+}
+
+#service .movielist li:nth-child(2) {
+	margin-bottom: 5px;
+}
+
+#service .movielist a:hover {
+	color: white;
+}
+
+#service .movielist a {
+	-webkit-transition: color .3s;
+	transition: color .3s;	
 }
 
 /*********************************************************************************/

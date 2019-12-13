@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -256,10 +259,11 @@ public class HomeController {
 
 		String clientId = "S6G1FEe39f_eEOMNA58_";// 애플리케이션 클라이언트 아이디값";
 		String clientSecret = "tfFbyN5NS0";// 애플리케이션 클라이언트 시크릿값";\
-
-		int display = 5; // 검색결과갯수. 최대100개
+		String search_text = request.getParameter("search_text");
+		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
+		int display = 15; // 검색결과갯수. 최대100개
 		try {
-			String text = URLEncoder.encode("조커", "utf-8");
+			String text = URLEncoder.encode(search_text, "utf-8");
 			String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text + "&display=" + display
 					+ "&";
 
@@ -283,7 +287,43 @@ public class HomeController {
 			}
 			br.close();
 			con.disconnect();
-			System.out.println(sb);
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(sb.toString());
+			JSONObject jsonObj = (JSONObject) obj;
+			JSONArray jsonArr = (JSONArray) jsonObj.get("items");
+			
+			for(int x=0; x<jsonArr.size(); x++) {
+				JSONObject jsonObj2 = (JSONObject) jsonArr.get(x);
+				
+				String title = (String) jsonObj2.get("title");
+				String director = (String) jsonObj2.get("director");
+				String sub_title = (String) jsonObj2.get("subtitle");
+				String img = (String) jsonObj2.get("image");
+				String date = (String) jsonObj2.get("pubDate");
+				String rating = (String) jsonObj2.get("userRating");
+				
+				title = title.replace("<b>", "");
+				title = title.replace("</b>", "");
+				img = img.replace("'\'", "");
+				if(img.isEmpty() == true) {
+					img = request.getContextPath()+"/resources/images/poster_default.gif";
+				}
+				if(director.isEmpty() != true) {
+					director = director.substring(0, director.length()-1);					
+				}
+				
+				MovieDTO mvdto = new MovieDTO();
+				
+				mvdto.setTitle(title);
+				mvdto.setSubtitle(sub_title);
+				mvdto.setDirector(director);
+				mvdto.setImg(img);
+				mvdto.setDate(date);
+				mvdto.setRating(rating);
+				ms.add(mvdto);
+			}
+			
+			request.setAttribute("searchlist", ms);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

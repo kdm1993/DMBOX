@@ -58,17 +58,18 @@
 	<div id="logo" class="container">
 		<div id="logo1">
 			<h1>
-				<a href="Home">DM<span>BOX</span></a>
+				<a href="Home" id="home">DM<span>BOX</span></a>
 			</h1>		
 		</div>
 		<div id="logo2">
-			<form action="se">
+			<form action="Service" method="get">
 				<select>
 					<option>통합검색</option>
 					<option>영화제목</option>
 					<option>감독이름</option>
 				</select>
-				<input type="text"/>	
+				<input type="text" name="search_text">
+				<input type="submit" value="검색" id="form_submit">
 			</form>
 		</div>
 		<!-- 
@@ -78,7 +79,7 @@
 	<div id="menu" class="container">
 		<ul>
 			<li><a href="Home">홈</a></li>
-			<li><a href="Home">영화</a></li>
+			<li><a href="Service">영화</a></li>
 			<li><a href="Home">대기중</a></li>
 			<li><a href="Home">대기중</a></li>
 			<li><a href="Home">대기중</a></li>
@@ -98,7 +99,31 @@
 					      document.cookie = "Tap_menu="+i;
 					  }
 				   }
-			})			
+			})
+			
+			$('#home').click(function(event) {		
+				var allcookies = document.cookie;
+				   cookiearray  = allcookies.split(';');
+
+				   for(var x=0; x<cookiearray.length; x++){
+					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+					      value = cookiearray[x].split('=')[1];
+					      document.cookie = "Tap_menu=0";
+					  }
+				   }
+			})
+			
+			$('#form_submit').click(function(event) {		
+				var allcookies = document.cookie;
+				   cookiearray  = allcookies.split(';');
+
+				   for(var x=0; x<cookiearray.length; x++){
+					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+					      value = cookiearray[x].split('=')[1];
+					      document.cookie = "Tap_menu=1";
+					  }
+				   }
+			})	
 		});
 	</script>
 	<%

@@ -16,7 +16,7 @@
 	</div>
 	<div id="login" class="container" style="width:287px; text-align: center; margin-top:-13px;">  
 		<div style=" margin-left:18px;">   
-			<form method="POST">      
+			<form>      
 				<div id="divid" class="div_left">
 		        	<input id="login__username" type="text" class="form__input" placeholder="Username" name="id" required>
 				</div>
