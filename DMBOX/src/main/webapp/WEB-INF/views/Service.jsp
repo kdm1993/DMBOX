@@ -44,6 +44,35 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<jsp:include page="Copyright.jsp"></jsp:include>
+	<div id="service_search" class="container">
+		<div id="service_1">
+			<form action="Service" method="get">
+				<select>
+					<option>통합검색</option>
+					<option>영화제목</option>
+					<option>감독이름</option>
+				</select>
+				<input type="text" name="search_text" value="${search_text}">
+				<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png" id="form_submit">
+			</form>		
+		</div>
+		<div id="service_2">
+			<a href="#">이전</a>
+			<c:forEach var="list" varStatus="status" begin="1" end="${total/15+1}">
+				<a href="javascript:void(0);" class="search_index">${status.count}</a>
+			</c:forEach>
+			<a href="#">다음</a>
+		</div>
+	</div>
+	<jsp:include page="Copyright.jsp"></jsp:include>  
+	<script>
+		$(document).ready(function() {
+			$('.search_index').click(function(event) {
+				var i = $('.search_index').index(this);
+				
+				location.href="Service?search_text="+ <%=request.getAttribute("search_text")%> +"&index="+i;
+			})
+		})
+	</script>
 </body>
 </html>
