@@ -261,18 +261,23 @@ public class HomeController {
 		String clientSecret = "tfFbyN5NS0";// 애플리케이션 클라이언트 시크릿값";\
 		String search_text = request.getParameter("search_text");
 		String total = "0";
+		String index = request.getParameter("index");
 		
+		if(index == null) {
+			index = "0";
+		}
 		if(search_text == null) {
 			search_text = "";
 		}
 		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
-		int display = 15; // 검색결과갯수. 최대100개
+		int display = 15; // 검색결과갯수. 최대 100개
+		int start = Integer.parseInt(index)*15+1; // 검색시작위치. 최대 1000
 		
 		try {
 			if(!search_text.equals("")) {
 				String text = URLEncoder.encode(search_text, "utf-8");
 				String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text + "&display=" + display
-						+ "&";
+						+ "&start=" + start;
 
 				URL url = new URL(apiURL);
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();

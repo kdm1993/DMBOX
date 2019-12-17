@@ -8,6 +8,18 @@
 <meta charset="UTF-8">
 </head>
 <body>
+	<%
+		int total = Integer.parseInt((String) request.getAttribute("total"));
+		int index_num;
+	
+		if((total/15+1) > 10) {
+			index_num = 10;
+		} else {
+			index_num = (total/15+1);
+		}
+		
+		request.setAttribute("index_num", index_num);
+	%>
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="service" class="container">
 		<div>
@@ -46,6 +58,13 @@
 	</div>
 	<div id="service_search" class="container">
 		<div id="service_1">
+			<a href="#">이전</a>
+			<c:forEach var="list" varStatus="status" begin="1" end="${index_num}">
+				<a href="javascript:;" class="search_index" onClick="return false;">${status.count}</a>
+			</c:forEach>
+			<a href="#">다음</a>
+		</div>
+		<div id="service_2">
 			<form action="Service" method="get">
 				<select>
 					<option>통합검색</option>
@@ -53,15 +72,8 @@
 					<option>감독이름</option>
 				</select>
 				<input type="text" name="search_text" value="${search_text}">
-				<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png" id="form_submit">
+				<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png">
 			</form>		
-		</div>
-		<div id="service_2">
-			<a href="#">이전</a>
-			<c:forEach var="list" varStatus="status" begin="1" end="${total/15+1}">
-				<a href="javascript:void(0);" class="search_index">${status.count}</a>
-			</c:forEach>
-			<a href="#">다음</a>
 		</div>
 	</div>
 	<jsp:include page="Copyright.jsp"></jsp:include>  
@@ -70,8 +82,10 @@
 			$('.search_index').click(function(event) {
 				var i = $('.search_index').index(this);
 				
-				location.href="Service?search_text="+ <%=request.getAttribute("search_text")%> +"&index="+i;
+				location.href="<%=request.getContextPath()%>/Service?search_text=<%=request.getAttribute("search_text")%>&index="+i;
 			})
+			
+			$('.search_index').eq(<%=request.getParameter("index")%>).addClass('on');
 		})
 	</script>
 </body>
