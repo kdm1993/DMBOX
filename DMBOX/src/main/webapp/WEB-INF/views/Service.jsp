@@ -58,11 +58,15 @@
 	</div>
 	<div id="service_search" class="container">
 		<div id="service_1">
-			<a href="#">이전</a>
+			<c:if test="${page!=0}">
+				<a href="javascript:;" onClick="return false;" id="previous">이전</a>			
+			</c:if>
 			<c:forEach var="list" varStatus="status" begin="1" end="${index_num}">
-				<a href="javascript:;" class="search_index" onClick="return false;">${status.count}</a>
+				<a href="javascript:;" class="search_index" onClick="return false;">${status.count + (page * 10)}</a>  
 			</c:forEach>
-			<a href="#">다음</a>
+			<c:if test="${(page+1)*150<total}">  
+				<a href="javascript:;" onClick="return false;" id="next">다음</a>
+			</c:if>  
 		</div>
 		<div id="service_2">
 			<form action="Service" method="get">
@@ -82,7 +86,23 @@
 			$('.search_index').click(function(event) {
 				var i = $('.search_index').index(this);
 				
-				location.href="<%=request.getContextPath()%>/Service?search_text=<%=request.getAttribute("search_text")%>&index="+i;
+				location.href="<%=request.getContextPath()%>/Service?search_text=<%=request.getAttribute("search_text")%>&index="+i+"&page=<%=Integer.parseInt((String)request.getAttribute("page"))%>";
+			})
+			
+			$('#previous').click(function(event) {
+				var path = "<%=request.getContextPath()%>";   
+				var search_text = <%=request.getAttribute("search_text")%>;
+				var page = <%=Integer.parseInt((String)request.getAttribute("page"))-1%>;
+
+				location.href=path+"/Service?search_text="+search_text+"&index=0&page="+page;
+			})
+			
+			$('#next').click(function(event) {
+				var path = "<%=request.getContextPath()%>";   
+				var search_text = <%=request.getAttribute("search_text")%>;
+				var page = <%=Integer.parseInt((String)request.getAttribute("page"))+1%>;
+
+				location.href=path+"/Service?search_text="+search_text+"&index=0&page="+page;
 			})
 			
 			$('.search_index').eq(<%=request.getParameter("index")%>).addClass('on');

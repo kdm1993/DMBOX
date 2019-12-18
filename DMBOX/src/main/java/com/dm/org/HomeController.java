@@ -18,7 +18,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,6 +39,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.mail.iap.Response;
+
 /**
  * Handles requests for the application home page.
  */
@@ -54,7 +58,7 @@ public class HomeController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String come(Model model, HttpServletRequest request) {
+	public String come(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		if(movielist.size() == 0) {
 			Runnable run = new Runnable() {
@@ -116,6 +120,9 @@ public class HomeController {
 			
 			t.start();
 		}
+		
+		Cookie cookie = new Cookie("Tap_menu", "0");
+		response.addCookie(cookie);
 		
 		return "come";
 	}
@@ -262,16 +269,20 @@ public class HomeController {
 		String search_text = request.getParameter("search_text");
 		String total = "0";
 		String index = request.getParameter("index");
+		String page = request.getParameter("page");
 		
 		if(index == null) {
 			index = "0";
+		}
+		if(page == null) {
+			page = "0";
 		}
 		if(search_text == null) {
 			search_text = "";
 		}
 		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
 		int display = 15; // 검색결과갯수. 최대 100개
-		int start = Integer.parseInt(index)*15+1; // 검색시작위치. 최대 1000
+		int start = Integer.parseInt(index)*15+1+(Integer.parseInt(page)*150); // 검색시작위치. 최대 1000
 		
 		try {
 			if(!search_text.equals("")) {
@@ -323,6 +334,8 @@ public class HomeController {
 					}
 					if(director.isEmpty() != true) {
 						director = director.substring(0, director.length()-1);					
+					} else if(director.isEmpty() == true) {
+						director = "알수없음";
 					}
 					
 					MovieDTO mvdto = new MovieDTO();
@@ -342,6 +355,7 @@ public class HomeController {
 		request.setAttribute("searchlist", ms);
 		request.setAttribute("total", total);
 		request.setAttribute("search_text", search_text);
+		request.setAttribute("page", page);
 
 		return "Service";
 	}
