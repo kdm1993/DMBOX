@@ -267,7 +267,7 @@ public class HomeController {
 		String clientId = "S6G1FEe39f_eEOMNA58_";// 애플리케이션 클라이언트 아이디값";
 		String clientSecret = "tfFbyN5NS0";// 애플리케이션 클라이언트 시크릿값";\
 		String search_text = request.getParameter("search_text");
-		String total = "0";
+		int total = 0;
 		String index = request.getParameter("index");
 		String page = request.getParameter("page");
 		
@@ -283,6 +283,7 @@ public class HomeController {
 		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
 		int display = 15; // 검색결과갯수. 최대 100개
 		int start = Integer.parseInt(index)*15+1+(Integer.parseInt(page)*150); // 검색시작위치. 최대 1000
+		start = start > 985 ? 985 : start;
 		
 		try {
 			if(!search_text.equals("")) {
@@ -314,7 +315,8 @@ public class HomeController {
 				Object obj = parser.parse(sb.toString());
 				JSONObject jsonObj = (JSONObject) obj;
 				JSONArray jsonArr = (JSONArray) jsonObj.get("items");
-				total = String.valueOf(jsonObj.get("total"));
+				total = Integer.parseInt(String.valueOf(jsonObj.get("total")));
+				total = total > 1000 ? 1000 : total;
 				
 				for(int x=0; x<jsonArr.size(); x++) {
 					JSONObject jsonObj2 = (JSONObject) jsonArr.get(x);
@@ -353,7 +355,7 @@ public class HomeController {
 					e.printStackTrace();
 				}
 		request.setAttribute("searchlist", ms);
-		request.setAttribute("total", total);
+		request.setAttribute("total", Integer.toString(total));
 		request.setAttribute("search_text", search_text);
 		request.setAttribute("page", page);
 

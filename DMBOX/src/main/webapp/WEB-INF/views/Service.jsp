@@ -10,12 +10,13 @@
 <body>
 	<%
 		int total = Integer.parseInt((String) request.getAttribute("total"));
+		int page_idx = Integer.parseInt((String) request.getAttribute("page"));
 		int index_num;
 	
-		if((total/15+1) > 10) {
+		if((total/15+1)-(page_idx * 10) > 10) {
 			index_num = 10;
 		} else {
-			index_num = (total/15+1);
+			index_num = (total/15+1)-(page_idx * 10);
 		}
 		
 		request.setAttribute("index_num", index_num);
