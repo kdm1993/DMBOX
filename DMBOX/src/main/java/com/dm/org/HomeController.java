@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
@@ -129,64 +130,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/Home", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
-		
-		String key = "69b70fa8443964c77dcc9ddc43bded19";
-		
-		Calendar date = new GregorianCalendar();
-		date.add(Calendar.DATE, -1);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String targetDt = sdf.format(date.getTime());
-		
-		try {
-			/*
-			URL url = new URL("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="
-					+ key + "&targetDt=" + targetDt);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setConnectTimeout(5000);
-			con.setReadTimeout(5000);
-			con.setRequestMethod("GET");
-			con.setDoOutput(false);
+		request.setAttribute("list", movielist);
 
-			StringBuilder sb = new StringBuilder();
-			if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				
-				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
-				String line;
-				while ((line = br.readLine()) != null) {
-					sb.append(line).append("\n");
-				}
-				br.close();
-				
-			} else {
-				System.out.println(con.getResponseMessage());
-			}
-			
-			JSONParser jsonParser = new JSONParser();
-	        JSONObject jsonObject = (JSONObject)jsonParser.parse(sb.toString());
-	        JSONObject json = (JSONObject)jsonObject.get("boxOfficeResult");
-	        JSONArray array = (JSONArray)json.get("dailyBoxOfficeList");
-	        ArrayList<BoxOfficeDTO> list = new ArrayList<BoxOfficeDTO>();
-	        
-	        for(int i=0; i<array.size(); i++){
-	            JSONObject row = (JSONObject)array.get(i);
-	            String movieCd = (String)row.get("movieCd");
-	            String movieNm = (String)row.get("movieNm");
-	            String rank = (String)row.get("rank");
-	            BoxOfficeDTO bo = new BoxOfficeDTO();
-	            bo.setMovieNm(movieNm);
-	            bo.setMovieCd(movieCd);
-	            bo.setRank(rank);
-
-	            list.add(bo);
-	        }
-	        
-	        request.setAttribute("list", list);
-			 */
-			request.setAttribute("list", movielist);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
 		if(movielist.size() != 0) {
 			return "index";			
 		} else {
@@ -259,6 +204,56 @@ public class HomeController {
 	public String Send_Mail(Model model, HttpServletRequest request) {
 		
 		return "Send_Mail";
+	}
+	
+	@RequestMapping(value = "/Join_clear", method = RequestMethod.POST)
+	public String Join_clear(Model model, HttpServletRequest request) {
+		
+		long curr = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String datetime = sdf.format(new Date(curr));
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String id = request.getParameter("id");
+		String pw = request.getParameter("password");
+		String name = request.getParameter("name");
+		String pc = request.getParameter("postcode");
+		String radr = request.getParameter("roadAddress");
+		String jiadr = request.getParameter("jibunAddress");
+		String oadr = request.getParameter("otheraddr");
+		String email = request.getParameter("email");
+		String tel = request.getParameter("tel");
+		String gender = request.getParameter("gender");
+		String emailYn = request.getParameter("emailYn");
+		String smsYn = request.getParameter("smsYn");
+		String joinDate = datetime;
+		
+		MemberDTO member = new MemberDTO();
+		
+		member.setId(id);
+		member.setPw(pw);
+		member.setName(name);
+		member.setPostcode(pc);
+		member.setRoadAddress(radr);
+		member.setJibunAddress(jiadr);
+		member.setOtherAddress(oadr);
+		member.setEmail(email);
+		member.setTel(tel);
+		member.setGender(gender);
+		member.setEmailYn(emailYn);
+		member.setSmsYn(smsYn);
+		member.setJoinDate(joinDate);
+		member.setAuthState("0");
+		member.setAuthKey("111111");
+		
+		sql.insert("member.join", member);
+		
+		return "come";
 	}
 
 	@RequestMapping(value = "/Service", method = RequestMethod.GET)

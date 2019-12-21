@@ -26,4 +26,13 @@
 		select * from member
 		where tel = #{tel}
 	</select>
+	<insert id="join" parameterType="com.dm.org.MemberDTO"> 
+		insert into member ( 
+			id, pw, name, postcode, roadAddress, jibunAddress, otherAddress, 
+			tel, gender, email, emailYn, smsYn, joinDate, AuthState, AuthKey
+		) values ( 
+			#{id}, password(#{pw}), #{name}, #{postcode}, #{roadAddress}, #{jibunAddress}, #{otherAddress}, 
+			#{tel}, #{gender}, #{email}, #{emailYn}, #{smsYn}, #{joinDate}, #{AuthState}, ${AuthKey}
+		) 
+	</insert>
 </mapper>

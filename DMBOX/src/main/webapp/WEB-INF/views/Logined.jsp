@@ -14,7 +14,7 @@
 			</h1>   
 		</div>
 	</div>
-	<div id="login" class="container" style="width:287px; text-align: center; margin-top:-13px;">  
+	<div id="login" class="container" style="width:284px; margin-top:-13px;">  
 		<div style=" margin-left:18px;">   
 			<form>      
 				<div id="divid" class="div_left">
