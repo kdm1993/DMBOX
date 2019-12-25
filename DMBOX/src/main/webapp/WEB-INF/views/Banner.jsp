@@ -19,40 +19,48 @@
 <body>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<%
-		boolean logincheck = false;
-		MemberDTO mbdto = new MemberDTO();
-		HttpSession httpsession = request.getSession(false);
-		if(httpsession != null) {
-			if(httpsession.getAttribute("user") != null) {
-				logincheck = true;
-				mbdto = (MemberDTO) httpsession.getAttribute("user");
-				pageContext.setAttribute("user", mbdto);
-			}
+		int logincheck = 0;
+		/*
+			logincheck --> 0 : 로그아웃	1 : 기존회원 로그인	  2 : 네이버 로그인
+		*/
+		
+		if(session.getAttribute("dmuser") != null) {
+			logincheck = 1;
+			String name = (String) session.getAttribute("dmuser");
+			request.setAttribute("user", name);
+		} else if(session.getAttribute("naveruser") != null) {
+			logincheck = 2;
+			String name = (String) session.getAttribute("naveruser");
+			request.setAttribute("user", name);
 		}
-		pageContext.setAttribute("logincheck", logincheck);
+		request.setAttribute("logincheck", logincheck);
 	%>
 	<div id="header" class="container">
 		<div><a href="#">고객센터</a></div>
 		<c:choose>
-			<c:when test="${logincheck == false}">
+			<c:when test="${logincheck == 0}">
 				<div><a href="JoinPage">회원가입</a></div>
 				<div><a href="Logined">로그인</a></div>
 			</c:when>
-			<c:when test="${logincheck == true}">
+			<c:otherwise>
 				<div><a href="Logout">로그아웃</a></div>
-				<%
-					if(mbdto.getId().equals("root")) {
-						%>
-							<div><a href="Memberlist">관리자메뉴</a></div>
-						<%
-					} else {
-						%>
-							<div><a href="#">마이페이지</a></div>						
-						<%
-					}
-				%>
-				<div><a style="color:white;"><%=mbdto.getName()%>님</a></div>
-			</c:when>
+				<c:if test="${user == root}">
+				</c:if>
+				<c:choose>
+					<c:when test="${user == root}">					
+						<div><a href="Memberlist">관리자메뉴</a></div>
+					</c:when>
+					<c:otherwise>
+						<div><a href="#">마이페이지</a></div>											
+					</c:otherwise>
+				</c:choose>
+				<div><a style="color:white;">${user}님</a></div>
+				<c:if test="${logincheck == 2}">  
+					<div style="margin-right:7px;">
+						<img src="${pageContext.request.contextPath}/resources/images/naverIcon.PNG" style="width:22px; height:22px;">
+					</div>	
+				</c:if>
+			</c:otherwise>
 		</c:choose>
 	</div>
 	<div id="logo" class="container">

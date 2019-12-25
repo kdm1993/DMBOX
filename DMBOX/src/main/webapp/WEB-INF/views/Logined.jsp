@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 </head>
 <body>
+	<c:if test="${url != null}">
+		<script>
+			var url = "<%=request.getAttribute("url")%>";
+			var option = "left=500, width=600, height=800";  
+		
+			window.open(url, 'Naver', option);
+		</script>
+	</c:if>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<div id="logo" class="container" style="width:287px; text-align: center; margin-top:350px;">
 		<div>
@@ -27,11 +36,15 @@
 			        <input id="login__submit" type="submit" value="로그인" onclick="login_check();">	  			
 				</div>
 			</form>
+			<div id="naverLogin" class="div_left">  
+				<button>
+					<img src="${pageContext.request.contextPath}/resources/images/naverLogin.png" style="width:250px; height:55px;" onclick="location.href='NaverLogin'">
+				</button>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		function login_check() {
-			
 			var divid = $('#divid');
 			var divpw = $('#divpw');
 			

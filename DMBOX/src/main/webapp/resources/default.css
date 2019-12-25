@@ -5,7 +5,7 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #282828 url(images/bg01.png) repeat;
+	background: #282828;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 12pt;
 	font-weight: 400;
@@ -331,7 +331,10 @@ ul.contact li a.icon-rss:before {
 /*********************************************************************************/
 #header {
 	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
 	border-bottom: 1px solid #363636;
+	margin-top:1px;
 }
 
 #header div {
@@ -762,6 +765,21 @@ ul.contact li a.icon-rss:before {
 	overflow: hidden;
 	padding: 3em 0em;
 	border-bottom: 1px solid #363636;
+}
+
+/*********************************************************************************/
+/* Login                                                                          */
+/*********************************************************************************/
+
+#login #naverLogin {
+	margin-left: -9px;
+	margin-top: 33px;
+}
+
+#login #naverLogin button {
+	border: 0;
+	outline: 0;
+	background: #282828;
 }
 
 /*********************************************************************************/
