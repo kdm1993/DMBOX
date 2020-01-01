@@ -381,6 +381,21 @@ ul.contact li a.icon-rss:before {
 #logo2 {
 	margin-left: 123px;
 	margin-top: 28px;
+	position: relative;
+}
+
+#logo2 input[type="text"] {
+	width: 308px;
+}
+
+#logo2 input[type="image"] {
+	width: 21px;
+	height:21px;
+	position: absolute;
+	left:360px;
+	top:13px;
+	border:0;
+	padding:0;
 }
 
 #logo select {

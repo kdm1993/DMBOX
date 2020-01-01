@@ -177,7 +177,7 @@
 			<div class="form-group" id="divId">
 				<label for="inputId" class="col-lg-2 control-label">아이디</label>
 				<div class="col-lg-10">
-					<input type="text" name="id" class="form-control onlyAlphabetAndNumber"
+					<input type="text" name="id" class="form-control onlyAlphabetAndNumber on"
 						id="id" data-rule-required="true"
 						placeholder="30자이내의 알파벳, 숫자만 입력 가능합니다" maxlength="30">
 					<input type="text" class="check_btn" id="id_check" readonly disabled>
@@ -186,7 +186,7 @@
 			<div class="form-group" id="divPassword">
 				<label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
 				<div class="col-lg-10">
-					<input type="password" name="password" class="form-control" id="password"
+					<input type="password" name="password" class="form-control on" id="password"
 						name="excludeHangul" data-rule-required="true" placeholder="패스워드"
 						maxlength="30">
 				</div>
@@ -195,7 +195,7 @@
 				<label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드
 					확인</label>
 				<div class="col-lg-10">
-					<input type="password" class="form-control" id="passwordCheck"
+					<input type="password" class="form-control on" id="passwordCheck"
 						data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
 					<input type="text" class="check_btn" id="pw_check" readonly disabled>
 				</div>
@@ -203,7 +203,7 @@
 			<div class="form-group" id="divName">
 				<label for="inputName" class="col-lg-2 control-label">이름</label>
 				<div class="col-lg-10">
-					<input type="text" name="name" class="form-control onlyHangul" id="name"
+					<input type="text" name="name" class="form-control onlyHangul on" id="name"
 						data-rule-required="true" placeholder="한글만 입력 가능합니다."
 						maxlength="15">
 				</div>
@@ -213,15 +213,15 @@
 				<label for="inputAddress" class="col-lg-2 control-label">주소</label>
 				<div class="col-lg-10">
 					<div class="div_left" style="margin-bottom:5px;">
-						<input type="text" name="postcode" class="form-control" name="wPostCode" id="postcode" placeholder="우편번호" readonly="readonly">
+						<input type="text" name="postcode" class="form-control on" name="wPostCode" id="postcode" placeholder="우편번호" readonly="readonly">
 	                    <input type="button" value="우편번호 찾기" style="width:120px;" onclick='execDaumPostcode();'>					
 					</div>
 					<div class="div_left" style="margin-bottom:5px;">    
-	                    <input type="text" name="roadAddress" class="form-control" name="wRoadAddress" id="roadAddress" placeholder="도로명주소" readonly="readonly">
-	                    <input type="text" name="jibunAddress" class="form-control" name="wJibunAddress" id="jibunAddress" placeholder="지번주소" readonly="readonly">					
+	                    <input type="text" name="roadAddress" class="form-control on" name="wRoadAddress" id="roadAddress" placeholder="도로명주소" readonly="readonly">
+	                    <input type="text" name="jibunAddress" class="form-control on" name="wJibunAddress" id="jibunAddress" placeholder="지번주소" readonly="readonly">					
 					</div>  
 					<div class="div_left">
-	                    <input type="text" name="otheraddr" class="form-control" name="wRestAddress" id="otheraddr" placeholder="나머지 주소"/>
+	                    <input type="text" name="otheraddr" class="form-control on" name="wRestAddress" id="otheraddr" placeholder="나머지 주소"/>
 					</div>
 				</div>
 			</div>
@@ -229,7 +229,7 @@
 			<div class="form-group" id="divEmail">
 				<label for="inputEmail" class="col-lg-2 control-label">이메일</label>
 				<div class="col-lg-10">
-					<input type="text" name="email" class="form-control" id="email"
+					<input type="text" name="email" class="form-control on" id="email"
 						data-rule-required="true" placeholder="이메일" maxlength="40">
 					<input type="text" class="check_btn" id="email_check" readonly disabled>
 				</div>
@@ -238,7 +238,7 @@
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
 					번호</label>
 				<div class="col-lg-10">
-					<input type="text" name="tel" class="form-control onlyNumber" id="phoneNumber"
+					<input type="text" name="tel" class="form-control onlyNumber on" id="phoneNumber"
 						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요"
 						maxlength="11">
 					<input type="text" class="check_btn" id="phone_check" readonly disabled>
@@ -247,7 +247,7 @@
 			<div class="form-group">
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">성별</label>
 				<div class="col-lg-10">
-					<select id="gender" name="gender">
+					<select id="gender" name="gender" class="on">
 						<option value="M">남자</option>
 						<option value="F">여자</option>
 					</select>
@@ -276,7 +276,7 @@
 					</label> <label class="radio-inline"> <input type="radio"
 						id="smsReceiveYn" name="smsYn" value="N"> 동의하지
 						않습니다.
-					</label>
+					</label>   
 				</div>
 			</div>
 			<div class="form-group">

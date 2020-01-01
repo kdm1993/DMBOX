@@ -27,7 +27,9 @@
 		if(session.getAttribute("dmuser") != null) {
 			logincheck = 1;
 			String name = (String) session.getAttribute("dmuser");
+			String id = (String) session.getAttribute("userID");
 			request.setAttribute("user", name);
+			request.setAttribute("userID", id);
 		} else if(session.getAttribute("naveruser") != null) {
 			logincheck = 2;
 			String name = (String) session.getAttribute("naveruser");
@@ -43,11 +45,9 @@
 				<div><a href="Logined">로그인</a></div>
 			</c:when>
 			<c:otherwise>
-				<div><a href="Logout">로그아웃</a></div>
-				<c:if test="${user == root}">
-				</c:if>
+				<div><a href="Logout">로그아웃</a></div>   
 				<c:choose>
-					<c:when test="${user == root}">					
+					<c:when test="${userID == root}">		   			
 						<div><a href="Memberlist">관리자메뉴</a></div>
 					</c:when>
 					<c:otherwise>
@@ -75,9 +75,9 @@
 					<option>통합검색</option>
 					<option>영화제목</option>
 					<option>감독이름</option>
-				</select>
+				</select>  
 				<input type="text" name="search_text">
-				<input type="submit" value="검색" id="form_submit">
+				<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png">
 			</form>
 		</div>
 		<!-- 
