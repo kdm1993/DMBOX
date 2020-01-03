@@ -19,11 +19,7 @@ Released   : 20130731
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 </head>
-<body>
-	<%
-		Cookie cookie = new Cookie("Tap_menu", "0");
-		response.addCookie(cookie);
-	%>
+<body>  
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="banner" class="container">
 		<div id="banner1">

@@ -104,7 +104,7 @@
 				   for(var x=0; x<cookiearray.length; x++){
 					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
 					      value = cookiearray[x].split('=')[1];
-					      document.cookie = "Tap_menu="+i;
+					      document.cookie = "Tap_menu="+i+";";
 					  }
 				   }
 			})
@@ -116,9 +116,9 @@
 				   for(var x=0; x<cookiearray.length; x++){
 					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
 					      value = cookiearray[x].split('=')[1];
-					      document.cookie = "Tap_menu=0";
+					      document.cookie = "Tap_menu=0;";
 					  }
-				   }
+				   }  
 			})
 			
 			$('#form_submit').click(function(event) {		
@@ -128,7 +128,7 @@
 				   for(var x=0; x<cookiearray.length; x++){
 					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
 					      value = cookiearray[x].split('=')[1];
-					      document.cookie = "Tap_menu=1";
+					      document.cookie = "Tap_menu=1;";
 					  }
 				   }
 			})	
