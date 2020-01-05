@@ -45,10 +45,10 @@
 							<td>${dto.id}</td>
 							<td>${dto.name}</td>
 							<td>${dto.gender}</td>
-							<td>${dto.address}</td>
+							<td>${dto.otherAddress}</td>
 							<td>${dto.tel}</td>
 							<td>${dto.email}</td>
-							<td>${dto.mail_send_agree}</td>
+							<td>${dto.emailYn}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

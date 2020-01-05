@@ -47,7 +47,7 @@
 			<c:otherwise>
 				<div><a href="Logout">로그아웃</a></div>   
 				<c:choose>
-					<c:when test="${userID == root}">		   			
+					<c:when test="${userID eq 'root'}">		     			
 						<div><a href="Memberlist">관리자메뉴</a></div>
 					</c:when>
 					<c:otherwise>
@@ -69,7 +69,7 @@
 				<a href="Home" id="home">DM<span>BOX</span></a>
 			</h1>		
 		</div>
-		<div id="logo2">
+		<div id="logo2" class="on">
 			<form action="Service" method="get">
 				<select>
 					<option>통합검색</option>

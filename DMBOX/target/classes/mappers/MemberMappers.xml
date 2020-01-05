@@ -32,7 +32,7 @@
 			tel, gender, email, emailYn, smsYn, joinDate, AuthState, AuthKey
 		) values ( 
 			#{id}, password(#{pw}), #{name}, #{postcode}, #{roadAddress}, #{jibunAddress}, #{otherAddress}, 
-			#{tel}, #{gender}, #{email}, #{emailYn}, #{smsYn}, #{joinDate}, #{AuthState}, ${AuthKey}
+			#{tel}, #{gender}, #{email}, #{emailYn}, #{smsYn}, #{joinDate}, #{AuthState}, #{AuthKey}
 		) 
 	</insert>
 </mapper>

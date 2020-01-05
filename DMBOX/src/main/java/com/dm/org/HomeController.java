@@ -195,9 +195,9 @@ public class HomeController {
 		return "Joinpage";
 	}
 
-	@RequestMapping(value = "/Login_Check", method = RequestMethod.POST)
 	@ResponseBody
-	public int Login_Check(Model model, HttpServletRequest request, MemberDTO mbdto2, HttpSession session) {
+	@RequestMapping(value = "/Login_Check", method = RequestMethod.POST)
+	public String Login_Check(Model model, HttpServletRequest request, MemberDTO mbdto2, HttpSession session) {
 
 		MemberDTO mbdto = (MemberDTO) sql.selectOne("member.login", mbdto2);
 		
@@ -206,9 +206,9 @@ public class HomeController {
 			session.setAttribute("userID", mbdto.getId());
 			session.setMaxInactiveInterval(100);
 
-			return 1;
+			return "1";
 		} else {
-			return 0;
+			return "0";
 		}
 	}
 	
@@ -259,6 +259,18 @@ public class HomeController {
 		long curr = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String datetime = sdf.format(new Date(curr));
+		String str = "";
+		char y;
+		
+		for(int x=0; x<10; x++) {
+			y = (char)((int)(Math.random()*43)+48);
+			
+			if(y == ':' || y == ';' || y == '>' || y == '=' || y == '<' || y == '?' || y == '@') {
+				x--;
+			} else {
+				str += String.valueOf(y);
+			}
+		}
 		
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -296,11 +308,67 @@ public class HomeController {
 		member.setSmsYn(smsYn);
 		member.setJoinDate(joinDate);
 		member.setAuthState("0");
-		member.setAuthKey("111111");
+		member.setAuthKey(str);
 		
 		sql.insert("member.join", member);
+		request.setAttribute("email", email);
 		
-		return "come";
+		String host = "smtp.naver.com";
+		final String user = "aodns114";
+		final String password = "aodnsehdals114!";
+		String title = "DM BOX 로그인 인증 메일입니다.";
+		String content = "<div style=\"width: 100%; height:500px; background: #282828; "
+				+ "color: white;\"><div style=\"text-align:center;\"><h2><p style=\""
+				+ "padding: 0em 0em;text-transform: uppercase;text-decoration: none;"
+				+ "font-size: 2.5em;color: #fff;font-weight: bold;\" rel=\"noreferrer "
+				+ "noopener\" target=\"_blank\"><span style=\"padding: 3em 0em; text-"
+				+ "transform: uppercase; text-decoration: none; font-size: 2.5em; color: "
+				+ "rgb(255, 255, 255); font-weight: bold;\">DM</span><span style=\"padding:"
+				+ " 3em 0em; text-transform: uppercase; text-decoration: none; font-size: "
+				+ "2.5em; color: rgb(188, 20, 20); font-weight: bold;\">BOX</span></p><p "
+				+ "style=\"padding: 0em 0em;text-transform: uppercase;text-decoration: none;"
+				+ "font-size: 2.5em;color: #fff;font-weight: bold;\" rel=\"noreferrer "
+				+ "noopener\" target=\"_blank\"><b style=\"font-size: 10pt;\"><span "
+				+ "style=\"font-size: 18pt;\"><br></span></b></p><p style=\"padding: 0em;"
+				+ " text-transform: uppercase; text-decoration: none; color: rgb"
+				+ "(255, 255, 255); font-weight: bold;\" rel=\"noreferrer noopener\" "
+				+ "target=\"_blank\"><span style=\"font-size: 36pt;\"><a href=\""
+				+ "http://dmcafe.co.kr/EmailAuth?id="+id+"&authkey="+str+"\" "
+				+ "target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" "
+				+ "rel=\"noreferrer noopener\">이메일 인증</a><span></span></span></p></h2>"
+				+ "</div></div>\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"";
+		Properties props = new Properties();
+
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", 465);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			String un = user;
+			String pw = password;
+
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(un, pw);
+			}
+		});
+		try {
+			MimeMessage msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress(user, "DM BOX"));
+			InternetAddress address = new InternetAddress();
+			address = new InternetAddress(email);
+			msg.addRecipient(Message.RecipientType.TO, address);
+			msg.setSubject(title, "UTF-8");
+			msg.setContent(content, "text/html; charset=UTF-8");
+			Transport.send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "JoinClear";
 	}
 
 	@RequestMapping(value = "/Service", method = RequestMethod.GET)
@@ -423,7 +491,7 @@ public class HomeController {
 		}
 		String host = "smtp.naver.com";
 		final String user = "aodns114";
-		final String password = "xptmxm123";
+		final String password = "aodnsehdals114!";
 		String title = request.getParameter("title");
 		String content = request.getParameter("textAreaContent");
 

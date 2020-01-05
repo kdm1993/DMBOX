@@ -8,9 +8,9 @@
 </head>
 <body>
 	<jsp:include page="Banner.jsp"></jsp:include>
-	<div id="join" class="container">
+	<div id="join" class="container on">  
 		<form class="form-horizontal" role="form" method="post"
-			action="Join_clear">
+			action="Join_clear">     
 			<div class="form-group">
 				<label for="provision" class="col-lg-2 control-label">회원가입약관</label>
 				<div class="col-lg-10" id="provision">
