@@ -8,7 +8,7 @@
 	</select>
 	<select id="login" resultType="com.dm.org.MemberDTO">
 		select * from member
-		where id = #{id} and pw = #{pw}
+		where id = #{id} and pw = password(#{pw})
 	</select>
 	<select id="member_agree" resultType="com.dm.org.MemberDTO">
 		select * from member

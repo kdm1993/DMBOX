@@ -362,7 +362,7 @@
 					}
 				});
 
-				$('#id').change(function(event) {
+				$('#id').keyup(function(event) {
 
 					var divId = $('#divId');
 					id_check = false;
@@ -396,7 +396,7 @@
 					}
 				});
 
-				$('#password').change(function(event) {
+				$('#password').keyup(function(event) {
 
 					var divPassword = $('#divPassword');
 					var divPasswordCheck = $('#divPasswordCheck');
@@ -422,7 +422,7 @@
 					}
 				});
 
-				$('#passwordCheck').change(function(event) {
+				$('#passwordCheck').keyup(function(event) {
 
 					var passwordCheck = $('#passwordCheck').val();
 					var password = $('#password').val();
@@ -450,7 +450,7 @@
 					}
 				});
 
-				$('#name').change(function(event) {
+				$('#name').keyup(function(event) {
 
 					var divName = $('#divName');
 					name_check = false;
@@ -465,7 +465,7 @@
 					}
 				});
 
-				$('#email').change(function(event) {
+				$('#email').keyup(function(event) {
 
 					var divEmail = $('#divEmail');
 					email_check = false;
@@ -503,7 +503,7 @@
 					}
 				});
 
-				$('#phoneNumber').change(function(event) {
+				$('#phoneNumber').keyup(function(event) {
 
 					var divPhoneNumber = $('#divPhoneNumber');
 					phone_check = false;
