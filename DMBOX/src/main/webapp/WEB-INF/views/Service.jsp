@@ -52,7 +52,7 @@
 			</c:when>
 			<c:otherwise>
 				<div style="text-align: center;">
-					<span style="font-weight: bold;">"${search_text}"</span><span>&nbsp;&nbsp;에 대한 검색결과가 없습니다</span>				
+					<span style="font-weight: bold; color:#FE9A2E;">"${search_text}"</span><span>&nbsp;&nbsp;에 대한 검색결과가 없습니다</span>				
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -69,7 +69,7 @@
 				<a href="javascript:;" onClick="return false;" id="next">다음</a>
 			</c:if>  
 		</div>
-		<div id="service_2">
+		<div id="service_2" class="on">  
 			<form action="Service" method="get">
 				<select>
 					<option>통합검색</option>
