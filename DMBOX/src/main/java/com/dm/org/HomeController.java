@@ -322,6 +322,20 @@ public class HomeController {
 	@RequestMapping(value = "/EmailAuth", method = RequestMethod.GET)
 	public String EmailAuth(Model model, HttpServletRequest request) {
 		
+		String id = request.getParameter("id");
+		String authkey = request.getParameter("authkey");
+		String result = "0";
+		
+		MemberDTO mbdto = (MemberDTO) sql.selectOne("member.id_check", id);
+		
+		if(mbdto.getAuthKey().equals(authkey)) {
+			result = "1";
+			mbdto.setAuthState("1");
+			sql.update("member.auth_change", mbdto);
+		}
+		
+		request.setAttribute("result", result);
+		
 		return "EmailAuth";
 	}
 	
@@ -416,6 +430,8 @@ public class HomeController {
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		MemberDTO mbdto = (MemberDTO) sql.selectOne("member.id_check", id);
+		mbdto.setEmail(email);
+		sql.update("member.email_change", mbdto);
 		
 		AuthSendMail(id, mbdto.getAuthKey(), email);
 		

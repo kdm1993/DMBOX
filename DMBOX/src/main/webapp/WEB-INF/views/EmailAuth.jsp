@@ -7,7 +7,14 @@
 </head>
 <body>
 	<script>
-		alert("인증이 완료되었습니다!");
+		var result = <%=request.getAttribute("result")%> 
+		
+		if(result == 0) {
+			alert("잘못된 접근입니다.");			
+		} else if(result == 1) {
+			alert("인증이 완료되었습니다");
+		}
+		
 		location.href="Home";
 	</script>
 </body>

@@ -112,29 +112,6 @@ Released   : 20130731
 			</div>
 		</div>
 	</div>
-	<div id="three-column" class="container">
-		<div id="tbox1">
-			<h2>Maecenas luctus</h2>
-			<p>Nullam non wisi a sem semper eleifend. Donec mattis libero
-				eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit
-				nulla suscipit interdum.</p>
-			<a href="#" class="button">Learn More</a>
-		</div>
-		<div id="tbox2">
-			<h2>Integer gravida</h2>
-			<p>Proin eu wisi suscipit nulla suscipit interdum. Nullam non
-				wisi a sem semper eleifend. Donec mattis libero eget urna. Duis
-				pretium velit ac mauris.</p>
-			<a href="#" class="button">Learn More</a>
-		</div>
-		<div id="tbox3">
-			<h2>Praesent scelerisque</h2>
-			<p>Donec mattis libero eget urna. Duis pretium velit ac mauris.
-				Proin eu wisi suscipit nulla suscipit interdum. Nullam non wisi a
-				sem semper eleifend.</p>
-			<a href="#" class="button">Learn More</a>
-		</div>
-	</div>
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
@@ -188,6 +165,29 @@ Released   : 20130731
 					</p>
 				</li>
 			</ul>
+		</div>
+	</div>  
+	<div id="three-column" class="container">
+		<div id="tbox1">
+			<h2>Maecenas luctus</h2>
+			<p>Nullam non wisi a sem semper eleifend. Donec mattis libero
+				eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit
+				nulla suscipit interdum.</p>
+			<a href="#" class="button">Learn More</a>
+		</div>
+		<div id="tbox2">
+			<h2>Integer gravida</h2>
+			<p>Proin eu wisi suscipit nulla suscipit interdum. Nullam non
+				wisi a sem semper eleifend. Donec mattis libero eget urna. Duis
+				pretium velit ac mauris.</p>
+			<a href="#" class="button">Learn More</a>
+		</div>
+		<div id="tbox3">
+			<h2>Praesent scelerisque</h2>
+			<p>Donec mattis libero eget urna. Duis pretium velit ac mauris.
+				Proin eu wisi suscipit nulla suscipit interdum. Nullam non wisi a
+				sem semper eleifend.</p>
+			<a href="#" class="button">Learn More</a>
 		</div>
 	</div>
 	<div id="footer" class="container">

@@ -37,12 +37,26 @@
 	<script>
 		$('#ReSend_btn').click(function(event) {
 			location.href="ReAuthMail?id=<%=request.getAttribute("id")%>&email=<%=request.getAttribute("email")%>";
-		});
+		});    
 		
 		$('#ChangeSend_btn').click(function(event) {
-			var email = $('ChangeEmail').val(); 
+			var email = $('#ChangeEmail').val(); 
 			
-			location.href="ChangeAuthMail?id=<%=request.getAttribute("id")%>&email="+email;
+			$.ajax({
+				type: 'POST',
+				url: 'Join_Check',
+				data: {
+					userEmail: email
+					},
+				success: function(result){
+					if(result == '1') {
+						location.href="ChangeAuthMail?id=<%=request.getAttribute("id")%>&email="+email;
+					} else if(result == '0') {
+						$('#EmailAuthRoom_2_2_top').addClass("has-error");
+						alert("중복되는 이메일 주소입니다");
+					}
+				} 
+			})
 		});
 	</script>
 </body>
