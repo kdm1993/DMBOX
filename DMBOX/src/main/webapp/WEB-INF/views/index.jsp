@@ -115,79 +115,72 @@ Released   : 20130731
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
-				<h2>
-					Welcome <span class="byline">to our website</span>
-				</h2>
-			</div>
-			<a href="#" class="image image-full"><img
-				src="${pageContext.request.contextPath}/resources/images/pic02.jpg"
-				alt="" /></a>
-			<p>
-				This is <strong>WellFormed</strong>, a free, fully
-				standards-compliant CSS template designed by <a
-					href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos
-				in this template are from <a href="http://fotogrph.com/">
-					Fotogrph</a>. This free template is released under the <a
-					href="http://templated.co/license">Creative Commons Attribution</a>
-				license, so you're pretty much free to do whatever you want with it
-				(even use it commercially) provided you give us credit for it. Have
-				fun :)
-			</p>
+				<div>
+					<h2>
+						Welcome <span class="byline">to kim-dongmin portfolio</span> 
+					</h2>				
+				</div>
+				<div id="all_profile">
+					<ul id="profile">    
+						<li><img id="profile_img" 
+							src="${pageContext.request.contextPath}/resources/images/profile.jpg"
+							alt="" /></li>							
+					</ul>
+					<ul id="profile_text">
+						<li><h2><p><strong>김 동 민</strong></p></h2></li>
+						<li><p>Back-end Developer(신입)</p></li>
+						<li><p>1993년 7월 17일</p></li>
+						<li><p>경상북도 경산시 옥곡동</p></li>
+						<li><p>010-5114-7688</p></li>
+						<li><p>kdm1993@naver.com</p></li>
+					</ul>   
+				</div>
+				<div>  
+					<p>프로그래밍을 처음 접했을때 생소한 개념들 때문에 혼란스러웠지만, 
+					익숙해지고 나니 내가 생각하는 대로 구현할 수 있는 프로그래밍이 굉장히 매력적으로 
+					다가왔고 태어나서 처음으로 무언가를 배우는 것에 재미를 느꼈습니다. 제어문을 이용해서
+					 책의 예제들을 풀때는 학창 시절 시험 문제집을 푸는게 아니라 잘 만들어진 퍼즐 게임을 하는 느낌을 받았습니다. 
+					이러한 경험들이 제가 개발자로 진로를 굳히게 된 계기들이 되었습니다.</p>			
+				</div>
+			</div>  
 		</div>
 		<div id="sidebar">
-			<h2 class="title">Mauris vulputate</h2>
-			<ul class="style2">
-				<li class="first">
+			<ul class="style2">  
+				<li class="first">  
 					<h3>
-						<a href="#">Maecenas luctus lectus</a>
+						<a href="#">Education</a>
 					</h3>
-					<p>
-						<a href="#">Quisque dictum integer nisl risus, sagittis
-							convallis, rutrum id, congue, and nibh.</a>
-					</p>
+					<p>국가평생교육진흥원 학점은행, 컴퓨터공학사(졸업예정)</p>
+					<p>2017.12.21 ~ 2020.02.25</p>
+					<p>응용SW엔지니어링 실무과정(경북산업직업전문학교) 수료</p>
+					<p>2019.07.05 ~ 2019.12.09</p>    
 				</li>
 				<li>
-					<h3>
-						<a href="#">Integer gravida nibh</a>
-					</h3>
-					<p>
-						<a href="#">Quisque dictum integer nisl risus, sagittis
-							convallis, rutrum id, congue, and nibh.</a>
-					</p>
-				</li>
-				<li>
-					<h3>
-						<a href="#">Nulla luctus eleifend</a>
-					</h3>
-					<p>
-						<a href="#">Quisque dictum integer nisl risus, sagittis
-							convallis, rutrum id, congue, and nibh.</a>
-					</p>
+					<h3> 
+						<a href="#">Certification</a>
+					</h3>  
+					<p>정보처리기사	</p>
+					<p>사무자동화산업기사</p>
+					<p>네트워크 관리사 2급</p>
 				</li>
 			</ul>
 		</div>
 	</div>  
 	<div id="three-column" class="container">
-		<div id="tbox1">
-			<h2>Maecenas luctus</h2>
-			<p>Nullam non wisi a sem semper eleifend. Donec mattis libero
-				eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit
-				nulla suscipit interdum.</p>
-			<a href="#" class="button">Learn More</a>
+		<div id="tbox1"> 
+			<h2>아구몬 어드벤처</h2>
+			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/agumon.jpg"></img>
+			<a href="#" class="button">자세히보기</a>
 		</div>
 		<div id="tbox2">
-			<h2>Integer gravida</h2>
-			<p>Proin eu wisi suscipit nulla suscipit interdum. Nullam non
-				wisi a sem semper eleifend. Donec mattis libero eget urna. Duis
-				pretium velit ac mauris.</p>
-			<a href="#" class="button">Learn More</a>
+			<h2>슈팅 게임</h2>
+			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/shooting.png"></img>
+			<a href="#" class="button">자세히보기</a>  
 		</div>
 		<div id="tbox3">
-			<h2>Praesent scelerisque</h2>
-			<p>Donec mattis libero eget urna. Duis pretium velit ac mauris.
-				Proin eu wisi suscipit nulla suscipit interdum. Nullam non wisi a
-				sem semper eleifend.</p>
-			<a href="#" class="button">Learn More</a>
+			<h2>미로 찾기</h2>
+			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/miro.png"></img>
+			<a href="#" class="button">자세히보기</a>
 		</div>
 	</div>
 	<div id="footer" class="container">

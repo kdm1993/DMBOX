@@ -199,7 +199,7 @@ ul.style2 {
 }
 
 ul.style2 li {
-	padding: 25px 0px 15px 0px;
+	padding: 32px 0px 24px 0px;
 	border-top: 1px solid #363636;
 }
 
@@ -209,7 +209,7 @@ ul.style2 .first {
 }
 
 ul.style2 h3 {
-	padding: 0px 0px 10px 0px;
+	padding: 0px 0px 16px 0px;
 	letter-spacing: 0.10em;
 }
 
@@ -787,8 +787,40 @@ ul.contact li a.icon-rss:before {
 /*********************************************************************************/
 #page {
 	overflow: hidden;
-	padding: 3em 0em;
+	padding: 3em 0;
+	padding-bottom: 0;
 	border-bottom: 1px solid #363636;
+}
+
+#profile_img {
+	width:190px; 
+	height:230px;
+}
+
+#page div:not(:last-child) {
+	margin-bottom: 36px;
+}
+
+#all_profile {
+	width: 800px;
+	height: 230px;
+	position: relative;
+}
+
+#profile {
+	position: absolute;
+	width: 190px;
+	height: 230px;
+	display: inline-block;
+	left:0;
+	top:0;
+}
+
+#profile_text {
+	width: 440px;
+	height: 230px;
+	margin-left: 275px;
+	display: inline-block;
 }
 
 /*********************************************************************************/
@@ -967,7 +999,7 @@ ul.contact li a.icon-rss:before {
 /*********************************************************************************/
 #sidebar {
 	float: right;
-	width: 300px;
+	width: 326px;
 }
 
 #sidebar .title {
@@ -1045,6 +1077,12 @@ ul.contact li a.icon-rss:before {
 
 #three-column #tbox1, #three-column #tbox2, #three-column #tbox3 {
 	float: left;
-	width: 300px;
+	text-align: center;
+	width: 400px;
 	padding: 50px 50px 80px 50px;
+}
+
+#three-column .tbox_img {
+	width: 310px;
+	height: 240px;
 }
