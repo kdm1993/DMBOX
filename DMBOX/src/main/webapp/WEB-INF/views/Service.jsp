@@ -24,7 +24,7 @@
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="service" class="container">
 		<div>
-			<span>검색결과 ${total}개</span>
+			<span><strong>'<%=request.getAttribute("search_text")%>'</strong>에 대한 검색결과 <strong>${total}</strong>개</span>
 		</div>
 		<c:choose>
 			<c:when test="${not empty searchlist}">
@@ -51,8 +51,8 @@
 				</c:forEach>				
 			</c:when>
 			<c:otherwise>
-				<div style="text-align: center;">
-					<span style="font-weight: bold; color:#FE9A2E;">"${search_text}"</span><span>&nbsp;&nbsp;에 대한 검색결과가 없습니다</span>				
+				<div style="text-align: center;">    
+					<span><strong>'${search_text}' 에 대한 검색결과가 없습니다</strong></span>				
 				</div>
 			</c:otherwise>
 		</c:choose>

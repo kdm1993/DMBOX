@@ -23,7 +23,7 @@
 	<div id="logo" class="container" style="width:287px; text-align: center; margin-top:350px;">
 		<div>
 			<h1>
-				<a href="Home">DM<span>BOX</span></a>
+				<a id="home" href="Home">DM<span>BOX</span></a>
 			</h1>   
 		</div>
 	</div>
@@ -66,6 +66,18 @@
 				return true;
 			}
 		}
+		
+		$('#home').click(function(event) {		
+			var allcookies = document.cookie;
+			   cookiearray  = allcookies.split(';');
+
+			   for(var x=0; x<cookiearray.length; x++){
+				  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+				      value = cookiearray[x].split('=')[1];
+				      document.cookie = "Tap_menu=0;";
+				  }
+			   }  
+		})
 	</script>
 </body>
 </html>

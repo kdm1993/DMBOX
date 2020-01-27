@@ -36,6 +36,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,7 @@ import com.sun.mail.iap.Response;
 @Controller
 public class HomeController {
 
+	static int start = 0;
 	public static StringBuilder sb;
 	private static ArrayList<BoxOfficeDTO> movielist = new ArrayList<BoxOfficeDTO>();
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -204,12 +206,132 @@ public class HomeController {
 	public String home(Model model, HttpServletRequest request) {
 		request.setAttribute("list", movielist);
 
+		if(start == 0) {
+			Runnable run = new Runnable() {
+				int y = 0;
+				int x = 2663492;
+
+				public void run() {
+					
+					System.out.println("실행 시작");
+
+					while(true) {
+						try {
+							Document doc = Jsoup.connect("https://bbs.ruliweb.com/av/board/300013/read/"+x+"?")
+									.userAgent("Chrome")
+									.timeout(20000).get();
+							Element body = doc.body();
+							
+							if(body.select("p .nick").text().equals("") == false) {
+								FreeBoardDTO fbdto = new FreeBoardDTO();
+								ReplyDTO redto = new ReplyDTO();
+								
+								String post_writer = body.select("p .nick").text();
+								String post_title = body.select(".subject_text").text();
+								String post_content = body.select(".view_content").toString().replaceAll("src=\"", "src=\"https:");
+								int view_idx = body.select(".user_info p:nth-child(5)").not(".like").text().indexOf("조회");
+								int reply_count = Integer.parseInt(body.select(".comment_count_wrapper .reply_count").text());
+								String post_view = body.select(".user_info p:nth-child(5)").not(".like").text().substring(view_idx+3);
+								Date date = new SimpleDateFormat("yyyy.MM.dd (HH:mm:ss)").parse(body.select(".regdate").text()); //String to date
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); //new format
+								String post_date = sdf.format(date);
+								
+								fbdto.setContent(post_content);
+								fbdto.setRegdate(post_date);
+								fbdto.setTitle(post_title);
+								fbdto.setView(post_view);
+								fbdto.setWriter(post_writer);
+								
+								for(int k=1; k<=reply_count; k++) {
+									if(body.select(".comment_element:nth-child("+ k +")").not(".best").select(".nick a strong").text().equals("") == false) {
+										String content = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".text").text();
+										String writer = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".nick a strong").text();
+										String parent = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".p_nick").text();
+										String date2 = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".time").text();
+										String depth = "1";
+										String post_idx = Integer.toString(x);
+										String reply_idx = Integer.toString(k);
+										
+										if(parent.equals("")) {
+										} else {
+											depth = "2";
+										}
+										
+										redto.setContent(content);
+										redto.setDepth(depth);
+										redto.setParent(parent);
+										redto.setPost_idx(post_idx);
+										redto.setRegdate(date2);
+										redto.setReply_idx(reply_idx);
+										redto.setWriter(writer);
+										
+										sql.insert("reply.reply_insert", redto);										
+									}
+								}
+								
+								sql.insert("freeboard.post_insert2", fbdto);
+								
+								y = y+1;
+								
+								if(y % 10 == 0) {
+									System.out.println(y+"회 진행중");
+								}
+							}
+							x++;
+							
+							Thread.sleep(4000);
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			};
+			Thread t = new Thread(run);
+			
+			t.start();
+			start = 1;
+		}
+		
 		return "index";
 	}
 
 	@RequestMapping(value = "/Logined", method = RequestMethod.GET)
 	public String Logined(Model model, HttpServletRequest request) {
 		return "Logined";
+	}
+	
+	@RequestMapping(value = "/Freeboard", method = RequestMethod.GET)
+	public String Freeboard(Model model, HttpServletRequest request) {
+		return "Freeboard";
+	}
+	
+	@RequestMapping(value = "/FreeboardWrite", method = RequestMethod.GET)
+	public String FreeboardWrite(Model model, HttpServletRequest request) {
+		return "FreeboardWrite";
+	}
+	
+	@RequestMapping(value = "/FreeboardWriteSend", method = RequestMethod.POST)
+	public String FreeboardWriteSend(Model model, HttpServletRequest request) {
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FreeBoardDTO fbdto = new FreeBoardDTO();
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy/MM/dd HH:mm:ss");
+		String format_time = format.format (System.currentTimeMillis());
+		
+		fbdto.setTitle(request.getParameter("title"));
+		fbdto.setContent(request.getParameter("textAreaContent"));
+		fbdto.setRegdate(format_time);
+		fbdto.setModdate(format_time);
+		fbdto.setWriter("작성자");
+		
+		sql.insert("freeboard.post_insert", fbdto);
+		
+		return "Freeboard";
 	}
 	
 	@RequestMapping(value = "/NaverLogin", method = {RequestMethod.GET, RequestMethod.POST})

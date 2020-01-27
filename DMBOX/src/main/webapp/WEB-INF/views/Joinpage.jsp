@@ -179,7 +179,7 @@
 				<div class="col-lg-10">
 					<input type="text" name="id" class="form-control onlyAlphabetAndNumber on"
 						id="id" data-rule-required="true"
-						placeholder="30자이내의 알파벳, 숫자만 입력 가능합니다" maxlength="30">
+						placeholder="30자이내의 알파벳, 숫자만 입력 가능" maxlength="30">
 					<input type="text" class="check_btn" id="id_check" readonly disabled>
 				</div>
 			</div>
@@ -204,7 +204,7 @@
 				<label for="inputName" class="col-lg-2 control-label">이름</label>
 				<div class="col-lg-10">
 					<input type="text" name="name" class="form-control onlyHangul on" id="name"
-						data-rule-required="true" placeholder="한글만 입력 가능합니다."
+						data-rule-required="true" placeholder="한글만 입력 가능"
 						maxlength="15">
 				</div>
 			</div>
@@ -225,7 +225,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="form-group" id="divEmail">
 				<label for="inputEmail" class="col-lg-2 control-label">이메일</label>
 				<div class="col-lg-10">
@@ -239,7 +238,7 @@
 					번호</label>
 				<div class="col-lg-10">
 					<input type="text" name="tel" class="form-control onlyNumber on" id="phoneNumber"
-						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요"
+						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력가능"
 						maxlength="11">
 					<input type="text" class="check_btn" id="phone_check" readonly disabled>
 				</div>
@@ -354,7 +353,7 @@
 					}
 				});
 				
-				$(".form-control").keyup(function(event) {
+				$(".form-control:not('#otheraddr')").keyup(function(event) {
 					var inputVal = $(this).val();
 					
 					if($.trim($(this).val()) != $(this).val()) {

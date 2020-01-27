@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<insert id="reply_insert" parameterType="com.dm.org.ReplyDTO"> 
+		insert into reply ( 
+			reply_idx, post_idx, content, regdate, writer, depth, parent
+		) values ( 
+			#{reply_idx}, #{post_idx}, #{content}, #{regdate}, #{writer}, #{depth}, #{parent}
+		) 
+	</insert>
+</mapper>

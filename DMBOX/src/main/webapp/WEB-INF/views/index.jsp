@@ -152,8 +152,8 @@ Released   : 20130731
 					</h3>
 					<p>국가평생교육진흥원 학점은행, 컴퓨터공학사(졸업예정)</p>
 					<p>2017.12.21 ~ 2020.02.25</p>
-					<p>응용SW엔지니어링 실무과정(경북산업직업전문학교) 수료</p>
-					<p>2019.07.05 ~ 2019.12.09</p>    
+					<p>경북산업직업전문학교 응용 SW 엔지니어링 실무과정 수료</p>
+					<p>2019.07.05 ~ 2019.12.09</p>      
 				</li>
 				<li>
 					<h3> 
@@ -167,7 +167,12 @@ Released   : 20130731
 		</div>
 	</div>  
 	<div id="three-column" class="container">
-		<div id="tbox1"> 
+		<div class="title" style="margin-top:30px; margin-left:30px;">   
+			<h2>
+				<span class="byline">Personal Project</span>     
+			</h2>				
+		</div>
+		<div id="tbox1">    
 			<h2>아구몬 어드벤처</h2>
 			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/agumon.jpg"></img>
 			<a href="#" class="button">자세히보기</a>

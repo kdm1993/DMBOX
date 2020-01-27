@@ -38,8 +38,7 @@
 		request.setAttribute("logincheck", logincheck);
 	%>
 	<div id="header" class="container">
-		<div><a href="#">고객센터</a></div>
-		<c:choose>
+		<c:choose>  
 			<c:when test="${logincheck == 0}">
 				<div><a href="JoinPage">회원가입</a></div>
 				<div><a href="Logined">로그인</a></div>
@@ -88,10 +87,9 @@
 		<ul>
 			<li><a href="Home">홈</a></li>
 			<li><a href="Service">영화</a></li>
-			<li><a href="Home">대기중</a></li>
-			<li><a href="Home">대기중</a></li>
-			<li><a href="Home">대기중</a></li>
-			<li><a href="Home">고객센터</a></li>
+			<li><a href="Home">개발일지</a></li>
+			<li><a href="Home">프로젝트</a></li>
+			<li><a href="Freeboard">게시판</a></li>
 		</ul>
 	</div>
 	<script>

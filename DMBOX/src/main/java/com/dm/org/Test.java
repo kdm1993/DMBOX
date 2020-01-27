@@ -1,6 +1,8 @@
 package com.dm.org;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -10,40 +12,25 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.ibatis.session.SqlSession;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
-		String host = "smtp.naver.com";
-		final String user = "aodns114";
-		final String password = "aodnsehdals114!";
-		String title = "DM BOX 로그인 인증 메일입니다.";
-		String content = "";
-		Properties props = new Properties();
-
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", 465);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.ssl.enable", "true");
-
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			String un = user;
-			String pw = password;
-
-			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				return new javax.mail.PasswordAuthentication(un, pw);
-			}
-		});
 		try {
-			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(user, "DM BOX"));
-			InternetAddress address = new InternetAddress();
-			address = new InternetAddress("kdm1993@naver.com");
-			msg.addRecipient(Message.RecipientType.TO, address);
-			msg.setSubject(title, "UTF-8");
-			msg.setContent(content, "text/html; charset=UTF-8");
-			Transport.send(msg);
-		} catch (Exception e) {
+			Document doc = Jsoup.connect("https://bbs.ruliweb.com/av/board/300013/read/2692966?")
+					.userAgent("Chrome")
+					.timeout(20000).get();
+			Element body = doc.body();
+			
+			System.out.println(body.select(".id:nth-child(2)"));
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
