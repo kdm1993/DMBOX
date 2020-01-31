@@ -3,13 +3,6 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="freeboard">
-	<insert id="post_insert2" parameterType="com.dm.org.FreeBoardDTO"> 
-		insert into freeboard ( 
-			title, content, regdate, writer, view
-		) values ( 
-			#{title}, #{content}, #{regdate}, #{writer}, #{view}
-		) 
-	</insert>
 	<insert id="post_insert" parameterType="com.dm.org.FreeBoardDTO"> 
 		insert into freeboard ( 
 			title, content, writer
@@ -17,4 +10,16 @@
 			#{title}, #{content}, #{writer}
 		) 
 	</insert>
+	<select id="selectlist" resultType="com.dm.org.FreeBoardDTO" parameterType="com.dm.org.SearchDTO">
+		select * from freeboard
+		order by idx desc
+		limit #{start}, #{count}
+	</select>
+	<select id="board_count" resultType="int">
+		select count(*) from freeboard
+	</select>
+	<select id="post_search" resultType="com.dm.org.FreeBoardDTO" parameterType="int">
+		select * from freeboard
+		where idx = #{idx}
+	</select>
 </mapper>

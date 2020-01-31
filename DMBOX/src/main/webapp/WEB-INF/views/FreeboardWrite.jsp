@@ -18,11 +18,12 @@
 				<textarea name="textAreaContent" id="textAreaContent" rows="25" style="width:100%"></textarea>		
 			</div>
 			<div>
-				<button type="submit" value="전송" id="submit_btn" class="btn btn-primary btn-lg">완료</button>
-			</div>    
-		</form>
+				<button type="submit" value="전송" id="submit_btn" class="btn btn-primary btn-lg" onsubmit="return false;">완료</button>
+				<input type="hidden" name="writer" value="<%=request.getAttribute("user")%>">
+			</div>
+		</form>  
 	</div>
-	<jsp:include page="Copyright.jsp"></jsp:include>
+	<jsp:include page="Copyright.jsp"></jsp:include>        
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/SmartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/SmartEditor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
@@ -36,8 +37,16 @@
 	    fCreator: "createSEditor2"
 	});
 	$("#submit_btn").click(function(){ 
-		oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", []); 
+		if("<%=request.getAttribute("user")%>" != "null") {
+			oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			
+			return true;  			
+		} else {      
+			Login_back();
+			return false;
+		}
 	});
+	
 	function pasteHTML(filepath){
 	    var sHTML = '<img src="${pageContext.request.contextPath}/resources/SmartEditor/photo_uploader/popup/saveimg/'+filepath+'">';
 	    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);

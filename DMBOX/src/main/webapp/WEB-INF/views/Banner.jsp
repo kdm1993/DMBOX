@@ -70,11 +70,6 @@
 		</div>
 		<div id="logo2" class="on">
 			<form action="Service" method="get">
-				<select>
-					<option>통합검색</option>
-					<option>영화제목</option>
-					<option>감독이름</option>
-				</select>  
 				<input type="text" name="search_text">
 				<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png">
 			</form>
@@ -88,8 +83,8 @@
 			<li><a href="Home">홈</a></li>
 			<li><a href="Service">영화</a></li>
 			<li><a href="Home">개발일지</a></li>
-			<li><a href="Home">프로젝트</a></li>
-			<li><a href="Freeboard">게시판</a></li>
+			<li><a href="Project?index=1">프로젝트</a></li>
+			<li><a href="Freeboard?index=0&page=0">게시판</a></li>
 		</ul>
 	</div>
 	<script>
@@ -116,7 +111,7 @@
 					      value = cookiearray[x].split('=')[1];
 					      document.cookie = "Tap_menu=0;";
 					  }
-				   }  
+				 }  
 			})
 			
 			$('#form_submit').click(function(event) {		
@@ -131,6 +126,22 @@
 				   }
 			})	
 		});
+		
+		function Login_back() {
+			alert('로그인이 필요합니다');
+			
+			var allcookies = document.cookie;
+			   cookiearray  = allcookies.split(';');
+
+			   for(var x=0; x<cookiearray.length; x++){
+				  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+				      value = cookiearray[x].split('=')[1];
+				      document.cookie = "Tap_menu=0;";
+				  }
+			    }  
+			   
+			location.href="Logined";
+		}
 	</script>
 	<%
 		Cookie[] cookies = request.getCookies();

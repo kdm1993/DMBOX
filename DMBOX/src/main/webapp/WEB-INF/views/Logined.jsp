@@ -7,13 +7,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<c:if test="${url != null}">    
-		<script>
-			var url = "<%=request.getAttribute("url")%>";
-			
-			location.href=url; 
-		</script>
-	</c:if>
 	<c:if test="${state != null}">    
 		<script>
 			alert("아이디 혹은 비밀번호가 일치하지 않습니다"); 
@@ -31,18 +24,18 @@
 		<div style=" margin-left:18px;" class="on">   
 			<form action="Login_Check" method="POST">      
 				<div id="divid" class="div_left on">
-		        	<input id="login__username" type="text" class="form__input" placeholder="Username" name="id" required>
+		        	<input id="login__username" type="text" class="form__input" style="margin-left:-2px; "placeholder="Username" name="id" required>
 				</div>
-				<div id="divpw" class="div_left on">
-			        <input id="login__password" type="password" class="form__input" placeholder="Password" name="password" required>				
+				<div id="divpw" class="div_left on">  
+			        <input id="login__password" type="password" class="form__input" style="margin-left:-2px;" placeholder="Password" name="password" required>				
 				</div>
 				<div class="div_left" class="on">
 			        <input id="login__submit" type="submit" value="로그인" onsubmit="login_check();">	  			
 				</div>
 			</form>
 			<div id="naverLogin" class="div_left">  
-				<button>
-					<img src="${pageContext.request.contextPath}/resources/images/naverLogin.png" style="width:250px; height:55px;" onclick="location.href='NaverLogin'">
+				<button>  
+					<img src="${pageContext.request.contextPath}/resources/images/naverLogin.png" style="width:250px; height:55px;" onclick="location.href='${url}'">
 				</button>
 			</div>
 		</div>

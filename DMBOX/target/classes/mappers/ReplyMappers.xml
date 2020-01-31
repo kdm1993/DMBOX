@@ -5,9 +5,21 @@
 <mapper namespace="reply">
 	<insert id="reply_insert" parameterType="com.dm.org.ReplyDTO"> 
 		insert into reply ( 
-			reply_idx, post_idx, content, regdate, writer, depth, parent
+			reply_idx, post_idx, content, writer, depth, parent
 		) values ( 
-			#{reply_idx}, #{post_idx}, #{content}, #{regdate}, #{writer}, #{depth}, #{parent}
+			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{reply_idx}
 		) 
 	</insert>
+	<insert id="rereply_insert" parameterType="com.dm.org.ReplyDTO"> 
+		insert into reply ( 
+			reply_idx, post_idx, content, writer, depth, parent
+		) values ( 
+			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{parent}
+		) 
+	</insert>
+	<select id="boardcount" resultType="com.dm.org.ReplyDTO" parameterType="int">
+		select * from reply
+		where post_idx = #{idx}
+		ORDER BY parent, depth
+	</select>
 </mapper>

@@ -19,7 +19,11 @@ Released   : 20130731
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 </head>
-<body>  
+<body>
+	<%
+		Cookie cookie = new Cookie("Tap_menu", "0");
+		response.addCookie(cookie);     
+	%>
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="banner" class="container">
 		<div id="banner1">
@@ -34,7 +38,7 @@ Released   : 20130731
 								<img src="${pageContext.request.contextPath}/resources/images/${boxoffice.grade}.png"
 									style="width: 20px; height: 20px; vertical-align: middle;" />
 							</div>
-							<div class="rank3">
+							<div class="rank3">     
 								<a href="#" class="rank3_a" style="font-weight: bold; color: white;">${boxoffice.movie_name}</a>
 								<div class="rank3_b">
 									<img src="${boxoffice.height_poster}"></img>
@@ -166,7 +170,7 @@ Released   : 20130731
 			</ul>
 		</div>
 	</div>  
-	<div id="three-column" class="container">
+	<div id="three-column" class="container circle">  
 		<div class="title" style="margin-top:30px; margin-left:30px;">   
 			<h2>
 				<span class="byline">Personal Project</span>     
@@ -175,17 +179,17 @@ Released   : 20130731
 		<div id="tbox1">    
 			<h2>아구몬 어드벤처</h2>
 			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/agumon.jpg"></img>
-			<a href="#" class="button">자세히보기</a>
+			<a href="Project?index=1" class="button">자세히보기</a>
 		</div>
 		<div id="tbox2">
 			<h2>슈팅 게임</h2>
 			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/shooting.png"></img>
-			<a href="#" class="button">자세히보기</a>  
+			<a href="Project?index=2" class="button">자세히보기</a>  
 		</div>
 		<div id="tbox3">
-			<h2>미로 찾기</h2>
+			<h2>길 찾기</h2>
 			<img class="tbox_img" src="${pageContext.request.contextPath}/resources/images/miro.png"></img>
-			<a href="#" class="button">자세히보기</a>
+			<a href="Project?index=3" class="button">자세히보기</a>
 		</div>
 	</div>
 	<div id="footer" class="container">
@@ -240,11 +244,24 @@ Released   : 20130731
 				
 				$('.rank3_b:eq('+ i +')').hide();
 			})
+			
 			$('.rank3_a').click(function(event) {
 				var i = $('.rank3_a').index(this);
 				
 				$('.carousel').carousel(i);
 			})
+			
+			$('.button').click(function(event) {		
+				var allcookies = document.cookie;
+				   cookiearray  = allcookies.split(';');
+
+				   for(var x=0; x<cookiearray.length; x++){
+					  if(cookiearray[x].split('=')[0] == 'Tap_menu') {  
+					      value = cookiearray[x].split('=')[1];
+					      document.cookie = "Tap_menu=3;";   
+					  }
+				   }
+			})	
 		});
 	</script>
 </body>

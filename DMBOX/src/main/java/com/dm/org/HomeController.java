@@ -1,29 +1,28 @@
 package com.dm.org;
 
-import java.awt.Desktop;
-import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.util.ByteArrayDataSource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +35,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +47,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.sun.mail.iap.Response;
 
 /**
  * Handles requests for the application home page.
@@ -64,17 +61,16 @@ public class HomeController {
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
+	private String apiResult = null; 
 	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
-	}
+	}  
 	
 	private void AuthSendMail(String id, String str, String email) {
-		String host = "smtp.naver.com";
-		final String user = "aodns114";
-		final String password = "aodnsehdals114!";
+		String host = "imap.gmail.com";
+		final String user = "aodns113";
 		String title = "DM BOX 로그인 인증 메일입니다.";
 		String content = "<div style=\"width: 100%; height:500px; background: #282828; "
 				+ "color: white;\"><div style=\"text-align:center;\"><h2><p style=\""
@@ -92,38 +88,45 @@ public class HomeController {
 				+ " text-transform: uppercase; text-decoration: none; color: rgb"
 				+ "(255, 255, 255); font-weight: bold;\" rel=\"noreferrer noopener\" "
 				+ "target=\"_blank\"><span style=\"font-size: 36pt;\"><a href=\""
-				+ "http://dmcafe.co.kr/EmailAuth?id="+id+"&authkey="+str+"\" "
-				+ "target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" "
+				+ "http://dmcafe.co.kr/EmailAuth?id="+id+"&authkey="+str+""
+				+ "&target=\"_blank\" style=\"cursor: pointer; white-space: pre;\" "
 				+ "rel=\"noreferrer noopener\">이메일 인증</a><span></span></span></p></h2>"
 				+ "</div></div>\r\n" + 
 				"\r\n" + 
 				"\r\n" + 
 				"";
-		Properties props = new Properties();
-
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", 465);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.ssl.enable", "true");
-
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			String un = user;
-			String pw = password;
-
-			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				return new javax.mail.PasswordAuthentication(un, pw);
-			}
-		});
-		try {
-			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(user, "DM BOX"));
-			InternetAddress address = new InternetAddress();
-			address = new InternetAddress(email);
-			msg.addRecipient(Message.RecipientType.TO, address);
-			msg.setSubject(title, "UTF-8");
-			msg.setContent(content, "text/html; charset=UTF-8");
-			Transport.send(msg);
-		} catch (Exception e) {
+		
+		Properties prop = System.getProperties();
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.port", "587");
+        
+        Authenticator auth = new MailAuth();
+        
+        Session session = Session.getDefaultInstance(prop, auth);
+        
+        MimeMessage msg = new MimeMessage(session);
+    
+        try {
+            msg.setSentDate(new Date());
+            
+            msg.setFrom(new InternetAddress(user, "DM BOX"));
+            InternetAddress to = new InternetAddress("kdm1993@naver.com");         
+            msg.setRecipient(Message.RecipientType.TO, to);            
+            msg.setSubject(title, "UTF-8");            
+            msg.setDataHandler(new DataHandler(new ByteArrayDataSource(content, "text/html;charset=UTF-8")));
+            
+            Transport.send(msg);
+            
+        } catch(AddressException ae) {            
+            System.out.println("AddressException : " + ae.getMessage());           
+        } catch(MessagingException me) {            
+            System.out.println("MessagingException : " + me.getMessage());
+        } catch(UnsupportedEncodingException e) {
+            System.out.println("UnsupportedEncodingException : " + e.getMessage());			
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -205,103 +208,109 @@ public class HomeController {
 	@RequestMapping(value = "/Home", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 		request.setAttribute("list", movielist);
-
-		if(start == 0) {
-			Runnable run = new Runnable() {
-				int y = 0;
-				int x = 2663492;
-
-				public void run() {
-					
-					System.out.println("실행 시작");
-
-					while(true) {
-						try {
-							Document doc = Jsoup.connect("https://bbs.ruliweb.com/av/board/300013/read/"+x+"?")
-									.userAgent("Chrome")
-									.timeout(20000).get();
-							Element body = doc.body();
-							
-							if(body.select("p .nick").text().equals("") == false) {
-								FreeBoardDTO fbdto = new FreeBoardDTO();
-								ReplyDTO redto = new ReplyDTO();
-								
-								String post_writer = body.select("p .nick").text();
-								String post_title = body.select(".subject_text").text();
-								String post_content = body.select(".view_content").toString().replaceAll("src=\"", "src=\"https:");
-								int view_idx = body.select(".user_info p:nth-child(5)").not(".like").text().indexOf("조회");
-								int reply_count = Integer.parseInt(body.select(".comment_count_wrapper .reply_count").text());
-								String post_view = body.select(".user_info p:nth-child(5)").not(".like").text().substring(view_idx+3);
-								Date date = new SimpleDateFormat("yyyy.MM.dd (HH:mm:ss)").parse(body.select(".regdate").text()); //String to date
-								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); //new format
-								String post_date = sdf.format(date);
-								
-								fbdto.setContent(post_content);
-								fbdto.setRegdate(post_date);
-								fbdto.setTitle(post_title);
-								fbdto.setView(post_view);
-								fbdto.setWriter(post_writer);
-								
-								for(int k=1; k<=reply_count; k++) {
-									if(body.select(".comment_element:nth-child("+ k +")").not(".best").select(".nick a strong").text().equals("") == false) {
-										String content = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".text").text();
-										String writer = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".nick a strong").text();
-										String parent = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".p_nick").text();
-										String date2 = body.select(".comment_element:nth-child("+ k +")").not(".best").select(".time").text();
-										String depth = "1";
-										String post_idx = Integer.toString(x);
-										String reply_idx = Integer.toString(k);
-										
-										if(parent.equals("")) {
-										} else {
-											depth = "2";
-										}
-										
-										redto.setContent(content);
-										redto.setDepth(depth);
-										redto.setParent(parent);
-										redto.setPost_idx(post_idx);
-										redto.setRegdate(date2);
-										redto.setReply_idx(reply_idx);
-										redto.setWriter(writer);
-										
-										sql.insert("reply.reply_insert", redto);										
-									}
-								}
-								
-								sql.insert("freeboard.post_insert2", fbdto);
-								
-								y = y+1;
-								
-								if(y % 10 == 0) {
-									System.out.println(y+"회 진행중");
-								}
-							}
-							x++;
-							
-							Thread.sleep(4000);
-						} catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			};
-			Thread t = new Thread(run);
-			
-			t.start();
-			start = 1;
-		}
 		
 		return "index";
 	}
-
-	@RequestMapping(value = "/Logined", method = RequestMethod.GET)
-	public String Logined(Model model, HttpServletRequest request) {
-		return "Logined";
+	
+	@RequestMapping(value = "/Project", method = RequestMethod.GET)
+	public String Project(Model model, HttpServletRequest request) {
+		return "Project";
 	}
 	
+	//게시글 화면
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(Model model, HttpServletRequest request) {
+		
+		int idx = Integer.parseInt(String.valueOf(request.getParameter("idx")));
+		
+		FreeBoardDTO fbdto = new FreeBoardDTO();
+		ReplyDTO redto = new ReplyDTO();
+		
+		List<ReplyDTO> list = sql.selectList("reply.boardcount", idx);
+		fbdto = sql.selectOne("freeboard.post_search", idx);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("post", fbdto);
+		model.addAttribute("reply_count", list.size());
+		
+		return "read";
+	}
+	
+	//댓글 처리
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	@ResponseBody  
+	public String reply(Model model, HttpServletRequest request) {
+		
+		String content = request.getParameter("content");
+		String writer = request.getParameter("writer");
+		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
+		int reply_idx = Integer.parseInt(request.getParameter("reply_idx"))+1;
+		int parent;
+		ReplyDTO redto = new ReplyDTO();
+		ReplyDTO search_redto = new ReplyDTO();
+		
+		redto.setContent(content);
+		redto.setDepth(1);
+		redto.setWriter(writer);
+		redto.setPost_idx(post_idx);
+		redto.setReply_idx(reply_idx);
+	
+		//1 : 일반댓글		2 : 답댓글
+		if(Integer.parseInt(request.getParameter("value")) == 1) {
+			sql.insert("reply.reply_insert", redto);
+		} else if(Integer.parseInt(request.getParameter("value")) == 2) {
+			List<ReplyDTO> list = sql.selectList("reply.boardcount", post_idx);
+			parent = list.get(Integer.parseInt((String)request.getParameter("index"))).getParent();
+			redto.setDepth(2); 
+			redto.setParent(parent);
+			
+			sql.insert("reply.rereply_insert", redto);		
+		}
+
+		return "1"; 
+	}
+	
+	//게시판 출력
 	@RequestMapping(value = "/Freeboard", method = RequestMethod.GET)
 	public String Freeboard(Model model, HttpServletRequest request) {
+		
+		int page = Integer.parseInt(String.valueOf(request.getParameter("page")));
+		int index = Integer.parseInt(String.valueOf(request.getParameter("index")));
+		int total = sql.selectOne("freeboard.board_count");
+		
+		SearchDTO sedto = new SearchDTO();
+		sedto.setStart((index*10+page)*20);
+		if(total-sedto.getStart() >= 20) {
+			sedto.setCount(20);			
+		} else {
+			sedto.setCount(total-sedto.getStart());
+		}
+		
+		List<FreeBoardDTO> list = sql.selectList("freeboard.selectlist", sedto);
+		
+		for(int x=0; x<sedto.getCount(); x++) {
+			int idx = list.get(x).getIdx();
+			
+			List<ReplyDTO> list2 = sql.selectList("reply.boardcount", idx);
+			
+			list.get(x).setReply_count(Integer.toString(list2.size()));
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+		model.addAttribute("index", index);
+		model.addAttribute("total", total);  
+	
+		int index_num;
+	
+		if((total/20+1)-(index * 10) > 10) {
+			index_num = 10;
+		} else {
+			index_num = (total/20+1)-(index * 10);
+		}
+		
+		model.addAttribute("index_num", index_num);
+		
 		return "Freeboard";
 	}
 	
@@ -310,6 +319,7 @@ public class HomeController {
 		return "FreeboardWrite";
 	}
 	
+	//게시글 작성
 	@RequestMapping(value = "/FreeboardWriteSend", method = RequestMethod.POST)
 	public String FreeboardWriteSend(Model model, HttpServletRequest request) {
 		
@@ -319,39 +329,38 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		FreeBoardDTO fbdto = new FreeBoardDTO();
-		SimpleDateFormat format = new SimpleDateFormat ( "yyyy/MM/dd HH:mm:ss");
-		String format_time = format.format (System.currentTimeMillis());
 		
 		fbdto.setTitle(request.getParameter("title"));
 		fbdto.setContent(request.getParameter("textAreaContent"));
-		fbdto.setRegdate(format_time);
-		fbdto.setModdate(format_time);
-		fbdto.setWriter("작성자");
-		
+		fbdto.setWriter(request.getParameter("writer"));
+		 
 		sql.insert("freeboard.post_insert", fbdto);
 		
-		return "Freeboard";
+		return "redirect:Freeboard?index=0&page=0";
 	}
 	
-	@RequestMapping(value = "/NaverLogin", method = {RequestMethod.GET, RequestMethod.POST})
-	public String NaverLogin(Model model, HttpServletRequest request, HttpSession session) {
+	//로그인, 네이버로그인
+	@RequestMapping(value = "/Logined", method = {RequestMethod.GET, RequestMethod.POST})
+	public String Login(Model model, HttpServletRequest request, HttpSession session) {
 		
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		request.setAttribute("url", naverAuthUrl);
+		session.setMaxInactiveInterval(1000);
+		model.addAttribute("url", naverAuthUrl);
 		
 		return "Logined"; 
 	}
 	
+	//네이버 콜백
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback(Model model, HttpServletRequest request, HttpSession session, @RequestParam String code, @RequestParam String state) throws IOException, ParseException {
 		
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		apiResult = naverLoginBO.getUserProfile(oauthToken);
+		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
@@ -359,8 +368,9 @@ public class HomeController {
 		//response의 nickname값 파싱
 		String name = (String)response_obj.get("name");
 		session.setAttribute("naveruser", name);
-		session.setMaxInactiveInterval(100);
+		session.setMaxInactiveInterval(9999);
 		model.addAttribute("result", apiResult);
+		
 		
 		return "come";
 	}
@@ -369,7 +379,8 @@ public class HomeController {
 	public String JoinPage(Model model, HttpServletRequest request) {
 		return "Joinpage";
 	}
-
+	
+	//로그인
 	@RequestMapping(value = "/Login_Check", method = RequestMethod.POST)
 	public String Login_Check(Model model, HttpServletRequest request, HttpSession session) {
 
@@ -389,7 +400,7 @@ public class HomeController {
 			} else if(mbdto.getAuthState().equals("1")) {
 				session.setAttribute("dmuser", mbdto.getName());
 				session.setAttribute("userID", mbdto.getId());
-				session.setMaxInactiveInterval(100);
+				session.setMaxInactiveInterval(9999);
 				
 				return "come";
 			}
@@ -400,6 +411,7 @@ public class HomeController {
 		return "Logined";
 	}
 	
+	//회원가입때 중복체크
 	@RequestMapping(value = "/Join_Check", method = RequestMethod.POST)
 	@ResponseBody
 	public String Join_Check(Model model, HttpServletRequest request) {
@@ -467,6 +479,7 @@ public class HomeController {
 		return "EmailAuthRoom";
 	}
 	
+	//회원가입
 	@RequestMapping(value = "/Join_clear", method = RequestMethod.POST)
 	public String Join_clear(Model model, HttpServletRequest request) {
 		
@@ -543,7 +556,7 @@ public class HomeController {
 		
 		request.setAttribute("email", email);
 		
-		return "JoinClear";
+		return "JoinClear";   
 	}
 	
 	@RequestMapping(value = "/ChangeAuthMail", method = RequestMethod.GET)
@@ -583,7 +596,7 @@ public class HomeController {
 		}
 		ArrayList<MovieDTO> ms = new ArrayList<MovieDTO>();
 		int display = 15; // 검색결과갯수. 최대 100개
-		int start = Integer.parseInt(index)*15+1+(Integer.parseInt(page)*150); // 검색시작위치. 최대 1000
+		int start = Integer.parseInt(page)*15+1+(Integer.parseInt(index)*150); // 검색시작위치. 최대 1000
 		start = start > 985 ? 985 : start;
 		
 		try {
@@ -656,9 +669,20 @@ public class HomeController {
 					e.printStackTrace();
 				}
 		request.setAttribute("searchlist", ms);
-		request.setAttribute("total", Integer.toString(total));
+		request.setAttribute("total", total);
 		request.setAttribute("search_text", search_text);
-		request.setAttribute("page", page);
+		request.setAttribute("index", index);
+
+		int page_idx = Integer.parseInt((String) request.getAttribute("index"));
+		int index_num;
+	
+		if((total/15+1)-(page_idx * 10) > 10) {
+			index_num = 10;
+		} else {
+			index_num = (total/15+1)-(page_idx * 10);
+		}
+		 
+		request.setAttribute("index_num", index_num);
 
 		return "Service";
 	}
