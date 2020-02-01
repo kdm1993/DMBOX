@@ -229,6 +229,12 @@ public class HomeController {
 		List<ReplyDTO> list = sql.selectList("reply.boardcount", idx);
 		fbdto = sql.selectOne("freeboard.post_search", idx);
 		
+		int view = fbdto.getView()+1;
+		fbdto.setView(view);  
+		
+		sql.update("freeboard.post_view_plus", fbdto);
+		fbdto = sql.selectOne("freeboard.post_search", idx);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("post", fbdto);
 		model.addAttribute("reply_count", list.size());
@@ -243,28 +249,51 @@ public class HomeController {
 		
 		String content = request.getParameter("content");
 		String writer = request.getParameter("writer");
-		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
-		int reply_idx = Integer.parseInt(request.getParameter("reply_idx"))+1;
+		String id = request.getParameter("id");
+		int post_idx = 0;
+		int reply_idx = 0;
+		int idx = Integer.parseInt(request.getParameter("idx"));
 		int parent;
 		ReplyDTO redto = new ReplyDTO();
 		ReplyDTO search_redto = new ReplyDTO();
 		
+		if(request.getParameter("post_idx") != null) {
+			post_idx = Integer.parseInt(request.getParameter("post_idx"));
+			reply_idx = Integer.parseInt(request.getParameter("reply_idx"))+1;
+			
+			redto.setPost_idx(post_idx);
+			redto.setReply_idx(reply_idx);
+		}
+		
 		redto.setContent(content);
 		redto.setDepth(1);
 		redto.setWriter(writer);
-		redto.setPost_idx(post_idx);
-		redto.setReply_idx(reply_idx);
+		redto.setId(id);
+		redto.setIdx(idx);
 	
-		//1 : 일반댓글		2 : 답댓글
-		if(Integer.parseInt(request.getParameter("value")) == 1) {
+		//1 : 일반댓글		2 : 답댓글	3 : 댓글수정	4 : 댓글삭제
+		
+		int value = Integer.parseInt(request.getParameter("value"));
+		
+		if(value == 1) {
 			sql.insert("reply.reply_insert", redto);
-		} else if(Integer.parseInt(request.getParameter("value")) == 2) {
+		} else if(value == 2) {
 			List<ReplyDTO> list = sql.selectList("reply.boardcount", post_idx);
 			parent = list.get(Integer.parseInt((String)request.getParameter("index"))).getParent();
 			redto.setDepth(2); 
 			redto.setParent(parent);
 			
 			sql.insert("reply.rereply_insert", redto);		
+		} else if(value == 3) {
+			long curr = System.currentTimeMillis();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String datetime = sdf.format(new Date(curr));
+			
+			redto.setModdate(datetime);
+			
+			sql.update("reply.reply_change", redto);
+		} else if(value == 4) {
+			sql.update("reply.reply_delete", redto);
 		}
 
 		return "1"; 
@@ -319,6 +348,20 @@ public class HomeController {
 		return "FreeboardWrite";
 	}
 	
+	//게시물 수정화면으로 이동
+	@RequestMapping(value = "/FreeboardChange", method = RequestMethod.GET)
+	public String FreeboardChange(Model model, HttpServletRequest request) {
+		
+		FreeBoardDTO fbdto = new FreeBoardDTO();
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		
+		fbdto = sql.selectOne("freeboard.post_search", idx);
+		
+		model.addAttribute("post", fbdto);
+		
+		return "FreeboardChange";  
+	}
+	
 	//게시글 작성
 	@RequestMapping(value = "/FreeboardWriteSend", method = RequestMethod.POST)
 	public String FreeboardWriteSend(Model model, HttpServletRequest request) {
@@ -335,11 +378,52 @@ public class HomeController {
 		fbdto.setTitle(request.getParameter("title"));
 		fbdto.setContent(request.getParameter("textAreaContent"));
 		fbdto.setWriter(request.getParameter("writer"));
+		fbdto.setId(request.getParameter("id"));
 		 
 		sql.insert("freeboard.post_insert", fbdto);
 		
 		return "redirect:Freeboard?index=0&page=0";
 	}
+	
+	//게시글 수정
+	@RequestMapping(value = "/FreeboardChangeSend", method = RequestMethod.POST)
+	public String FreeboardChangeSend(Model model, HttpServletRequest request) {
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		FreeBoardDTO fbdto = new FreeBoardDTO();
+		
+		long curr = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String datetime = sdf.format(new Date(curr));
+		
+		fbdto.setTitle(request.getParameter("title"));
+		fbdto.setContent(request.getParameter("textAreaContent"));
+		fbdto.setWriter(request.getParameter("writer"));
+		fbdto.setId(request.getParameter("id"));
+		fbdto.setModdate(datetime);
+		fbdto.setIdx(Integer.parseInt(request.getParameter("idx")));
+		 
+		sql.update("freeboard.post_change", fbdto);
+		
+		return "redirect:Freeboard?index=0&page=0";
+	}
+	
+	//게시글 삭제
+		@RequestMapping(value = "/FreeboardDelete", method = RequestMethod.GET)
+		public String FreeboardDelete(Model model, HttpServletRequest request) {
+
+			int idx = Integer.parseInt(request.getParameter("idx"));
+			
+			sql.delete("freeboard.post_delete", idx);
+			
+			return "redirect:Freeboard?index=0&page=0";
+		}
 	
 	//로그인, 네이버로그인
 	@RequestMapping(value = "/Logined", method = {RequestMethod.GET, RequestMethod.POST})
@@ -367,7 +451,9 @@ public class HomeController {
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
 		String name = (String)response_obj.get("name");
-		session.setAttribute("naveruser", name);
+		session.setAttribute("naveruser", name); 
+		String id = (String)response_obj.get("email");
+		session.setAttribute("userID", id);
 		session.setMaxInactiveInterval(9999);
 		model.addAttribute("result", apiResult);
 		

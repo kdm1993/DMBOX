@@ -5,13 +5,14 @@
 <mapper namespace="freeboard">
 	<insert id="post_insert" parameterType="com.dm.org.FreeBoardDTO"> 
 		insert into freeboard ( 
-			title, content, writer
+			title, content, writer, id
 		) values ( 
-			#{title}, #{content}, #{writer}
+			#{title}, #{content}, #{writer}, #{id}
 		) 
 	</insert>
 	<select id="selectlist" resultType="com.dm.org.FreeBoardDTO" parameterType="com.dm.org.SearchDTO">
 		select * from freeboard
+		where state = "0"
 		order by idx desc
 		limit #{start}, #{count}
 	</select>
@@ -22,4 +23,19 @@
 		select * from freeboard
 		where idx = #{idx}
 	</select>
+	<update id="post_change" parameterType="com.dm.org.FreeBoardDTO">
+		update freeboard
+		set title = #{title}, content = #{content}, moddate = #{moddate}
+		where idx = #{idx}
+	</update>
+	<update id="post_delete" parameterType="int">
+		update freeboard
+		set state = "1"
+		where idx = #{idx}
+	</update>
+	<update id="post_view_plus" parameterType="com.dm.org.FreeBoardDTO">
+		update freeboard
+		set view = #{view}
+		where idx = #{idx}
+	</update>
 </mapper>

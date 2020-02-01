@@ -27,14 +27,18 @@
 		if(session.getAttribute("dmuser") != null) {
 			logincheck = 1;
 			String name = (String) session.getAttribute("dmuser");
-			String id = (String) session.getAttribute("userID");
 			request.setAttribute("user", name);
+			String id = (String) session.getAttribute("userID");
 			request.setAttribute("userID", id);
+			
 		} else if(session.getAttribute("naveruser") != null) {
 			logincheck = 2;
 			String name = (String) session.getAttribute("naveruser");
 			request.setAttribute("user", name);
-		}
+			String id = (String) session.getAttribute("userID");
+			request.setAttribute("userID", id);
+		}	
+		
 		request.setAttribute("logincheck", logincheck);
 	%>
 	<div id="header" class="container">

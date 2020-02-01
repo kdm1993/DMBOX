@@ -11,7 +11,9 @@ public class FreeBoardDTO {
 	private String regdate;
 	private String moddate;
 	private String writer;
-	private String view;
+	private String id;
+	private int view;
 	private String state;
 	private String reply_count;
 }
+

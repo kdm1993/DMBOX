@@ -9,9 +9,11 @@ public class ReplyDTO {
 	private String regdate;
 	private String moddate;
 	private String writer;
+	private String id;
 	private int post_idx;
 	private int reply_idx;
 	private int depth;
 	private int parent;
 	private String state;
+	private int idx;
 }

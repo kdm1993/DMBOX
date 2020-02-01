@@ -5,21 +5,31 @@
 <mapper namespace="reply">
 	<insert id="reply_insert" parameterType="com.dm.org.ReplyDTO"> 
 		insert into reply ( 
-			reply_idx, post_idx, content, writer, depth, parent
+			reply_idx, post_idx, content, writer, depth, parent, id
 		) values ( 
-			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{reply_idx}
+			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{reply_idx}, #{id}
 		) 
 	</insert>
 	<insert id="rereply_insert" parameterType="com.dm.org.ReplyDTO"> 
 		insert into reply ( 
-			reply_idx, post_idx, content, writer, depth, parent
+			reply_idx, post_idx, content, writer, depth, parent, id
 		) values ( 
-			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{parent}
+			#{reply_idx}, #{post_idx}, #{content}, #{writer}, #{depth}, #{parent}, #{id}
 		) 
 	</insert>
 	<select id="boardcount" resultType="com.dm.org.ReplyDTO" parameterType="int">
 		select * from reply
-		where post_idx = #{idx}
+		where post_idx = #{idx} 
 		ORDER BY parent, depth
 	</select>
+	<update id="reply_change" parameterType="com.dm.org.ReplyDTO">
+		update reply
+		set content = #{content}, moddate = #{moddate}
+		where idx = #{idx}
+	</update>
+	<update id="reply_delete" parameterType="int">
+		update reply
+		set state = "1"
+		where idx = #{idx}
+	</update>
 </mapper>

@@ -13,14 +13,14 @@
 	<jsp:include page="Banner.jsp"></jsp:include>
 	<div id="freeboard" class="container">
 		<div id="freeboard_1">
-			<table class="tbl_type" cellspacing="0">
+			<table class="tbl_type" cellspacing="0" style="table-layout: fixed">
 				<caption>DMBOX 게시판</caption>
 				<colgroup>
 					<col width="10%">
 					<col width="50%">
-					<col width="15%">  
+					<col width="15%">      
 					<col width="15%">   
-					<col width="10%">       
+					<col width="10%">         
 				</colgroup>
 				<thead>
 					<tr>
@@ -33,12 +33,12 @@
 				</thead>
 				<tbody>
 					<c:forEach var="fb" items="${list}">   
-						<tr align="center">
-							<td>${fb.idx}</td>
-							<td><a href="read?idx=${fb.idx}">${fb.title}<span style="color:red;">&nbsp;[${fb.reply_count}]</span></a></td>
-							<td>${fb.writer}</td>
-							<td>${fb.regdate}</td>
-							<td>${fb.view}</td>  
+						<tr align="center">    
+							<td>${fb.idx}</td>    
+							<td><a href="read?idx=${fb.idx}">${fb.title}<span style="color:red;">&nbsp;[${fb.reply_count}]</span></a></td> 
+							<td style="width:162px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><span>${fb.writer} (${fb.id})</span></td> 
+							<td>${fb.regdate}</td>   
+							<td>${fb.view}</td>      
 						</tr>					
 					</c:forEach>
 				</tbody>
