@@ -112,7 +112,7 @@ public class HomeController {
             msg.setSentDate(new Date());
             
             msg.setFrom(new InternetAddress(user, "DM BOX"));
-            InternetAddress to = new InternetAddress("kdm1993@naver.com");         
+            InternetAddress to = new InternetAddress(email);           
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject(title, "UTF-8");            
             msg.setDataHandler(new DataHandler(new ByteArrayDataSource(content, "text/html;charset=UTF-8")));
@@ -217,6 +217,11 @@ public class HomeController {
 		return "Project";
 	}
 	
+	@RequestMapping(value = "/Homepage", method = RequestMethod.GET)
+	public String Homepage(Model model, HttpServletRequest request) {
+		return "Homepage";
+	}
+	
 	//게시글 화면
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(Model model, HttpServletRequest request) {
@@ -252,7 +257,7 @@ public class HomeController {
 		String id = request.getParameter("id");
 		int post_idx = 0;
 		int reply_idx = 0;
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		int idx;
 		int parent;
 		ReplyDTO redto = new ReplyDTO();
 		ReplyDTO search_redto = new ReplyDTO();
@@ -265,22 +270,26 @@ public class HomeController {
 			redto.setReply_idx(reply_idx);
 		}
 		
+		if(request.getParameter("idx") != null) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+			redto.setIdx(idx);
+		}
+		
 		redto.setContent(content);
 		redto.setDepth(1);
 		redto.setWriter(writer);
 		redto.setId(id);
-		redto.setIdx(idx);
 	
-		//1 : 일반댓글		2 : 답댓글	3 : 댓글수정	4 : 댓글삭제
+		//1 : 일반댓글		2 : 답댓글	3 : 댓글수정	4 : 댓글삭제  
 		
 		int value = Integer.parseInt(request.getParameter("value"));
 		
 		if(value == 1) {
 			sql.insert("reply.reply_insert", redto);
 		} else if(value == 2) {
-			List<ReplyDTO> list = sql.selectList("reply.boardcount", post_idx);
-			parent = list.get(Integer.parseInt((String)request.getParameter("index"))).getParent();
 			redto.setDepth(2); 
+			List<ReplyDTO> list = sql.selectList("reply.boardcount", post_idx);    
+			parent = list.get(Integer.parseInt((String)request.getParameter("index"))).getParent();
 			redto.setParent(parent);
 			
 			sql.insert("reply.rereply_insert", redto);		

@@ -48,15 +48,7 @@
 				<div><a href="Logined">로그인</a></div>
 			</c:when>
 			<c:otherwise>
-				<div><a href="Logout">로그아웃</a></div>   
-				<c:choose>
-					<c:when test="${userID eq 'root'}">		     			
-						<div><a href="Memberlist">관리자메뉴</a></div>
-					</c:when>
-					<c:otherwise>
-						<div><a href="#">마이페이지</a></div>											
-					</c:otherwise>
-				</c:choose>
+				<div><a href="Logout">로그아웃</a></div>    
 				<div><a style="color:white;">${user}님</a></div>
 				<c:if test="${logincheck == 2}">  
 					<div style="margin-right:7px;">
@@ -86,7 +78,7 @@
 		<ul>
 			<li><a href="Home">홈</a></li>
 			<li><a href="Service">영화</a></li>
-			<li><a href="Home">개발일지</a></li>
+			<li><a href="Homepage?index=1">홈페이지 기능</a></li>
 			<li><a href="Project?index=1">프로젝트</a></li>
 			<li><a href="Freeboard?index=0&page=0">게시판</a></li>
 		</ul>

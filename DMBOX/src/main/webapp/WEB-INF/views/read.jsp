@@ -15,8 +15,8 @@
 				<ul>   
 					<li>
 						<p style="font-weight: bold;">게시판</p>	   		
-					</li>
-					<li class="slide_bar"><a href="Freeboard">영화 정보 게시판</a></li>
+					</li>  
+					<li class="slide_bar"><a href="Freeboard?index=0&page=0">영화 정보 게시판</a></li>
 				</ul>
 			</div>   
 		</div>
@@ -47,26 +47,69 @@
 							<c:if test="${reply.depth == 2}">
 								<div class="rereply"><span>┗</span></div>   
 							</c:if>         
-							<div class="reply_info"><span>&nbsp;&nbsp;&nbsp;&nbsp;삭제된 댓글입니다</span></div>
-						</c:when>
-						<c:otherwise>
-							<c:if test="${reply.depth == 2}">
-								<div class="rereply"><span>┗</span></div>   
-							</c:if>	
-							<div class="reply_info">  
-								<div>  
-									<input type="text" style="display: none;" class="reply_idx" value="${reply.idx}"> 
+							<div class="reply_info">
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;삭제된 댓글입니다</span>
+								<div style="display: none;">        
 									<span>${reply.writer}  (${reply.id})&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<span style="color:#E2E2E2;">${reply.regdate}&nbsp;&nbsp;&nbsp;&nbsp;</span>
 									<button class="reply_btn">답글</button>   
 									<button class="reply_btn_cancle" style="color: red; display: none">답글 취소</button>
-									<c:if test="${post.id == userID}">
+									<c:if test="${reply.id == userID}">
+										<input type="text" style="display: none;" class="reply_idx" value="${reply.idx}">     
 										<a href="#" class="reply_delete" style="float: right" onclick="return false;">삭제</a>
 										<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;</span>    
 										<a href="#" class="reply_change" style="float: right" onclick="return false;">수정</a>
 										<a href="#" class="reply_change_cancle" style="float: right; color: red; display: none;" onclick="return false;">수정 취소</a>
 									</c:if>  
 								</div>
+							</div>
+							<div class="rereply_on" style="display: none;">    
+								<c:if test="${reply.depth == 2}">    
+									<div class="rereply"></div>
+								</c:if>   
+								<div class="reply_input" id="rereply_input">     
+									<div>
+										<textarea class="recomment_text"></textarea>
+									</div>       
+									<div>    
+										<a href="#" class="recomment_submit" onclick="return false;">등록</a>  
+									</div>  
+								</div>					
+							</div>
+							<c:if test="${reply.id == userID}">
+								<div class="rereply_change_on" style="display: none;">    
+									<c:if test="${reply.depth == 2}">    
+										<div class="rereply"></div>
+									</c:if>   
+									<div class="reply_input" id="rereply_input">     
+										<div>  
+											<textarea class="comment_change_text">${reply.content}</textarea>
+										</div>       
+										<div>    
+											<a href="#" class="comment_change_submit" onclick="return false;">수정</a>  
+										</div>  
+									</div>					
+								</div>  
+							</c:if>  
+						</c:when>
+						<c:otherwise>
+							<c:if test="${reply.depth == 2}">  
+								<div class="rereply"><span>┗</span></div>   
+							</c:if>	
+							<div class="reply_info">  
+								<div>  
+									<span>${reply.writer}  (${reply.id})&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="color:#E2E2E2;">${reply.regdate}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<button class="reply_btn">답글</button>   
+									<button class="reply_btn_cancle" style="color: red; display: none">답글 취소</button>
+									<c:if test="${reply.id == userID}">
+										<input type="text" style="display: none;" class="reply_idx" value="${reply.idx}">
+										<a href="#" class="reply_delete" style="float: right" onclick="return false;">삭제</a>
+										<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;</span>    
+										<a href="#" class="reply_change" style="float: right" onclick="return false;">수정</a>
+										<a href="#" class="reply_change_cancle" style="float: right; color: red; display: none;" onclick="return false;">수정 취소</a>
+									</c:if>  
+								</div>  
 								<div class="reply_content">
 									<span>${reply.content}</span>  
 								</div> 						
@@ -84,19 +127,21 @@
 									</div>  
 								</div>					
 							</div>
-							<div class="rereply_change_on" style="display: none;">    
-								<c:if test="${reply.depth == 2}">    
-									<div class="rereply"></div>
-								</c:if>   
-								<div class="reply_input" id="rereply_input">     
-									<div>  
-										<textarea class="comment_change_text">${reply.content}</textarea>
-									</div>       
-									<div>    
-										<a href="#" class="comment_change_submit" onclick="return false;">수정</a>  
-									</div>  
-								</div>					
-							</div>
+							<c:if test="${reply.id == userID}">   
+								<div class="rereply_change_on" style="display: none;">    
+									<c:if test="${reply.depth == 2}">    
+										<div class="rereply"></div>
+									</c:if>   
+									<div class="reply_input" id="rereply_input">     
+										<div>  
+											<textarea class="comment_change_text">${reply.content}</textarea>
+										</div>       
+										<div>    
+											<a href="#" class="comment_change_submit" onclick="return false;">수정</a>  
+										</div>  
+									</div>					
+								</div>  
+							</c:if>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -136,6 +181,31 @@
 		$('.reply_content').eq(i).show();    
 		$('.rereply_change_on').eq(i).hide();  
 	}) 
+	
+	$('#comment_submit').click(function(event) {
+
+		if($('#comment_text').val() == "") {
+			alert("공백입니다")
+		} else if("<%=request.getAttribute("user")%>" != "null") {  
+			$.ajax({
+				type: 'POST',
+				url: 'reply',  
+				data: {  
+					value: 1,
+					content : $('#comment_text').val(), 
+					writer : "<%=request.getAttribute("user")%>",
+					post_idx : <%=request.getParameter("idx")%>, 
+					reply_idx : <%=request.getAttribute("reply_count")%>,
+					id : "<%=request.getAttribute("userID")%>"  
+					},
+				success: function(result){
+					location.reload();
+				} 
+			})
+		} else {
+			Login_back();
+		}  
+	})
 
 	$('.recomment_submit').click(function(event) {
 		
@@ -155,31 +225,6 @@
 					reply_idx : <%=request.getAttribute("reply_count")%>,
 					index : i,
 					id : "<%=request.getAttribute("userID")%>"   
-					},
-				success: function(result){
-					location.reload();
-				} 
-			})
-		} else {
-			Login_back();
-		}  
-	})
-	
-	$('#comment_submit').click(function(event) {
-
-		if($('#comment_text').val() == "") {
-			alert("공백입니다")
-		} else if("<%=request.getAttribute("user")%>" != "null") {  
-			$.ajax({
-				type: 'POST',
-				url: 'reply',  
-				data: {  
-					value: 1,
-					content : $('#comment_text').val(), 
-					writer : "<%=request.getAttribute("user")%>",
-					post_idx : <%=request.getParameter("idx")%>, 
-					reply_idx : <%=request.getAttribute("reply_count")%>,
-					id : "<%=request.getAttribute("userID")%>"  
 					},
 				success: function(result){
 					location.reload();

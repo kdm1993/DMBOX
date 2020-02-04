@@ -18,6 +18,7 @@
 	</select>
 	<select id="board_count" resultType="int">
 		select count(*) from freeboard
+		where state = "0"  
 	</select>
 	<select id="post_search" resultType="com.dm.org.FreeBoardDTO" parameterType="int">
 		select * from freeboard
